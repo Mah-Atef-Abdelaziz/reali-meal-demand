@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Install system dependencies for PostgreSQL and GCC
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc libpq-dev curl && \
+    build-essential python3-dev libpq-dev curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Install python dependencies
