@@ -1,0 +1,22 @@
+# ===================================================
+# REAL.i Meal Demand AI — systemd Backend Service
+# ===================================================
+[Unit]
+Description=FastAPI application for REAL.i Meal Demand Prediction
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/var/www/reali
+EnvironmentFile=/var/www/reali/backend/.env
+ExecStart=/var/www/reali/venv/bin/uvicorn backend.main:app --host 127.0.0.1 --port 8000 --workers 4
+
+Restart=always
+RestartSec=5
+
+# Logging configuration
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

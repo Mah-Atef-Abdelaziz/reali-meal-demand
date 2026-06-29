@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fbf8eb;
+  --color-gold-100: #f5edcb;
+  --color-gold-200: #eadb97;
+  --color-gold-300: #dec15c;
+  --color-gold-400: #d5aa31;
+  --color-gold-500: #c59424; /* primary gold */
+  --color-gold-600: #a7741b;
+  --color-gold-700: #845517;
+  --color-gold-800: #684117;
+  --color-gold-900: #553516;
+  --color-gold-950: #311c09;
+
+  --color-charcoal-50: #f6f6f6;
+  --color-charcoal-100: #e7e7e8;
+  --color-charcoal-200: #d1d2d5;
+  --color-charcoal-300: #aeafb6;
+  --color-charcoal-400: #838590;
+  --color-charcoal-500: #636572;
+  --color-charcoal-600: #4e505b;
+  --color-charcoal-700: #3f404a;
+  --color-charcoal-800: #2d2e35; /* secondary charcoal */
+  --color-charcoal-900: #1b1c20; /* main dark background */
+  --color-charcoal-950: #0f1013; /* deep dark background */
+  
+  --font-sans: 'Montserrat', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  --background: #0f1013;
+  --foreground: #f6f6f6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1013;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d2e35;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c59424;
+}
+
+/* Custom animations */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(197, 148, 36, 0.4);
+  }
+  50% {
+    opacity: .8;
+    box-shadow: 0 0 25px rgba(197, 148, 36, 0.7);
+  }
+}
+
+.pulse-gold {
+  animation: pulse-gold 2s infinite;
+}
+
+/* Card glassmorphism */
+.glass-panel {
+  background: rgba(27, 28, 32, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 148, 36, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-panel-active {
+  border: 1px solid rgba(197, 148, 36, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(197, 148, 36, 0.15);
+}

@@ -1,0 +1,45 @@
+# ===================================================
+# REAL.i Meal Demand AI — Docker Compose
+# ===================================================
+version: "3.9"
+
+services:
+  # ---------- FastAPI Backend ----------
+  backend:
+    build:
+      context: .
+      target: backend
+    container_name: reali-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./meal_demand.db
+      - DATABASE_SYNC_URL=sqlite:///./meal_demand.db
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - CORS_ORIGINS=http://localhost:3000,http://frontend:3000
+    volumes:
+      - ./meal_demand.db:/app/meal_demand.db
+      - ./ml/models:/app/ml/models
+      - ./ml/processed:/app/ml/processed
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ---------- Next.js Frontend ----------
+  frontend:
+    build:
+      context: .
+      target: frontend
+    container_name: reali-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

@@ -1,0 +1,566 @@
+## Build a Complete AI-Powered Meal Demand Prediction & Smart Assistant System
+
+I want you to act as a Senior AI Engineer, NLP Engineer, Data Scientist, Backend Engineer, Frontend Engineer, UI/UX Designer, DevOps Engineer, and Software Architect.
+
+Your task is to build a **complete production-ready AI system from scratch** based on the attached business requirements document.
+
+The final deliverable must be a real-world enterprise application that is deployable and scalable.
+
+---
+
+# Project Overview
+
+The company is a food service provider responsible for preparing meals for employees.
+
+The company suffers from significant food waste because it prepares hot meals before knowing the exact number of employees who will actually request them.
+
+Cold meals are not a problem because they can be stored, but hot meals cannot.
+
+The goal is to use Artificial Intelligence to predict tomorrow's meal demand and reduce food waste while ensuring enough meals are prepared.
+
+The system should also include an intelligent NLP chatbot that allows managers to interact with the system using natural language.
+
+---
+
+# Business Objective
+
+Build an AI Decision Support System that can:
+
+* Predict tomorrow's hot meal demand.
+* Estimate food waste before it happens.
+* Help kitchen managers decide how many meals to prepare.
+* Reduce operational costs.
+* Improve food planning.
+* Generate AI insights.
+* Answer business questions through a chatbot.
+
+This is **not just a chatbot**.
+
+The chatbot is only one module of the overall AI platform.
+
+---
+
+# Functional Requirements
+
+## Phase 1 — System Analysis
+
+Read the business requirements carefully.
+
+Extract
+
+* Business Problem
+* Stakeholders
+* Functional Requirements
+* Non-functional Requirements
+* User Stories
+* Use Cases
+* AI Opportunities
+* Risks
+* Assumptions
+
+---
+
+## Phase 2 — Software Architecture
+
+Design the complete system architecture.
+
+Include
+
+* Backend Architecture
+* Frontend Architecture
+* AI Architecture
+* NLP Pipeline
+* ML Pipeline
+* Database Architecture
+* Deployment Architecture
+
+Generate architecture diagrams.
+
+---
+
+## Phase 3 — Database Design
+
+Design a professional SQL database.
+
+Create all tables.
+
+Examples include
+
+Employees
+
+Departments
+
+Work Locations
+
+Meal Types
+
+Daily Menu
+
+Attendance
+
+Meal Transactions
+
+Employee Eligibility
+
+Employee Schedule
+
+Weather
+
+Holiday Calendar
+
+Visitors
+
+Prediction Results
+
+Model Logs
+
+Feedback
+
+Chat History
+
+Audit Logs
+
+Notifications
+
+Everything should be normalized.
+
+Generate
+
+* ERD
+* SQL scripts
+* Constraints
+* Indexes
+
+---
+
+## Phase 4 — Data Engineering
+
+Since no dataset currently exists:
+
+Create a realistic synthetic dataset.
+
+Generate at least
+
+* 100,000 employee records
+* 2 years of historical meal transactions
+* Attendance records
+* Daily menus
+* Holidays
+* Weekdays
+* Employee shifts
+* Employee grades
+* Employee ages
+* Employee weights
+* Office locations
+* Offshore locations
+* Onshore locations
+* Visitors
+* Weather information
+* Company events
+
+Make the generated data realistic.
+
+---
+
+## Phase 5 — Machine Learning
+
+Develop a complete Machine Learning pipeline.
+
+The AI should predict:
+
+* Number of employees requesting hot breakfast
+* Number requesting hot lunch
+* Number requesting hot dinner
+
+Also predict
+
+* Expected food waste
+* Confidence score
+* Recommended preparation quantity
+
+Perform
+
+* Data preprocessing
+* Feature engineering
+* Missing value handling
+* Feature selection
+* Model comparison
+* Hyperparameter tuning
+* Model evaluation
+
+Compare algorithms such as
+
+* XGBoost
+* LightGBM
+* CatBoost
+* Random Forest
+* Gradient Boosting
+* LSTM (time-series)
+* Transformer-based forecasting (if applicable)
+
+Select the best model.
+
+Evaluate using
+
+* MAE
+* RMSE
+* MAPE
+* R²
+
+Save the trained model.
+
+---
+
+## Phase 6 — Explainable AI
+
+Implement Explainable AI.
+
+Use SHAP and feature importance to explain predictions.
+
+Example:
+
+"The prediction increased because tomorrow is Thursday, grilled chicken is on the menu, and offshore workers have a high probability of requesting lunch."
+
+---
+
+## Phase 7 — NLP Chatbot
+
+Build an AI chatbot using Large Language Models and Retrieval-Augmented Generation (RAG).
+
+The chatbot must answer questions such as:
+
+How many hot lunches are expected tomorrow?
+
+How much food waste can be avoided?
+
+Which location has the highest demand?
+
+Which department consumes the most meals?
+
+Show prediction accuracy for last week.
+
+How many visitors are expected?
+
+Why did today's prediction increase?
+
+Compare this month with last month.
+
+Generate tomorrow's meal preparation plan.
+
+Create a weekly management report.
+
+The chatbot should understand natural language instead of requiring fixed commands.
+
+---
+
+## Phase 8 — Smart Recommendations
+
+The AI should proactively recommend actions.
+
+Examples:
+
+Reduce chicken meals by 12%.
+
+Prepare 18 extra dinners.
+
+Demand is expected to increase due to holidays.
+
+Tomorrow's waste risk is high.
+
+Prepare more vegetarian meals.
+
+Order fewer ingredients.
+
+Delay cooking until attendance confirmation.
+
+These recommendations should be generated automatically.
+
+---
+
+## Phase 9 — Dashboards
+
+Create a professional dashboard.
+
+Include
+
+Real-time KPIs
+
+Predicted meals
+
+Actual meals
+
+Food waste
+
+Prediction accuracy
+
+Monthly trends
+
+Department analysis
+
+Location analysis
+
+Menu popularity
+
+Visitor statistics
+
+Cost savings
+
+Carbon footprint reduction
+
+Forecast charts
+
+Interactive filters
+
+Export reports
+
+---
+
+## Phase 10 — AI Reports
+
+Generate
+
+Daily Report
+
+Weekly Report
+
+Monthly Report
+
+Executive Report
+
+Automatically export reports as PDF and Excel.
+
+---
+
+## Phase 11 — Backend API
+
+Develop REST APIs.
+
+Document them using Swagger/OpenAPI.
+
+Implement
+
+Authentication
+
+Authorization
+
+Role-based access
+
+JWT
+
+Logging
+
+Validation
+
+Error handling
+
+Caching
+
+---
+
+## Phase 12 — Frontend
+
+Develop a modern responsive web application.
+
+Use
+
+React + Next.js
+
+or
+
+Angular
+
+Create pages for
+
+Dashboard
+
+Prediction
+
+Reports
+
+Employees
+
+Menus
+
+Analytics
+
+Chatbot
+
+Settings
+
+Administration
+
+---
+
+## Phase 13 — Security
+
+Implement
+
+JWT Authentication
+
+Role-based permissions
+
+Encryption
+
+Rate limiting
+
+Audit logs
+
+HTTPS
+
+Secrets management
+
+Input validation
+
+---
+
+## Phase 14 — Testing
+
+Write
+
+Unit Tests
+
+Integration Tests
+
+API Tests
+
+ML Validation Tests
+
+End-to-End Tests
+
+Performance Tests
+
+Load Tests
+
+---
+
+## Phase 15 — DevOps
+
+Containerize the application using Docker.
+
+Create
+
+Dockerfiles
+
+Docker Compose
+
+CI/CD pipeline
+
+GitHub Actions
+
+Environment configuration
+
+Monitoring
+
+Logging
+
+Automatic deployment
+
+---
+
+## Phase 16 — Production Deployment
+
+Deploy the complete application.
+
+Use
+
+Azure (preferred)
+
+or AWS
+
+or Google Cloud
+
+Deploy
+
+Frontend
+
+Backend
+
+Database
+
+AI Model
+
+Chatbot
+
+Monitoring
+
+SSL
+
+Domain
+
+Production environment
+
+The final system must be accessible through a public URL.
+
+---
+
+## Phase 17 — Documentation
+
+Produce professional documentation including
+
+Software Requirements Specification (SRS)
+
+Software Design Document (SDD)
+
+Architecture Document
+
+Database Design
+
+API Documentation
+
+Deployment Guide
+
+User Manual
+
+Administrator Guide
+
+AI Model Documentation
+
+Project Report
+
+Installation Guide
+
+Maintenance Guide
+
+Future Improvements
+
+---
+
+## Phase 18 — Final Deliverables
+
+The project should include:
+
+* Complete source code
+* AI model
+* Database scripts
+* Synthetic dataset
+* REST API
+* React frontend
+* NLP chatbot
+* Prediction engine
+* Smart recommendation engine
+* Interactive dashboards
+* Automated reports
+* Docker configuration
+* CI/CD pipeline
+* Production deployment
+* Complete documentation
+* GitHub repository with a clean commit history
+* Public production URL
+
+---
+
+# Preferred Technology Stack
+
+* **Backend:** Python (FastAPI preferred)
+* **Frontend:** React + Next.js
+* **Database:** PostgreSQL
+* **ORM:** SQLAlchemy
+* **AI/ML:** Scikit-learn, XGBoost, LightGBM, CatBoost, TensorFlow/PyTorch (if needed)
+* **NLP:** LangChain + OpenAI-compatible LLM + RAG
+* **Vector Database:** FAISS or ChromaDB
+* **Caching:** Redis
+* **Containerization:** Docker
+* **Cloud:** Microsoft Azure
+* **CI/CD:** GitHub Actions
+* **Monitoring:** Prometheus + Grafana
+
