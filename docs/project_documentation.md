@@ -119,3 +119,16 @@ The project is structured to deploy completely on free-tier platforms without re
 ### 3. Frontend: Vercel (Next.js)
 * Automated deployment mapping the `/frontend` subfolder.
 * Uses the environment variable `NEXT_PUBLIC_API_URL` to route API requests to the Hugging Face Space endpoint.
+
+---
+
+## 7. Project Repositories & Deployments
+
+* **GitHub Repository**: [github.com/Mah-Atef-Abdelaziz/reali-meal-demand](https://github.com/Mah-Atef-Abdelaziz/reali-meal-demand)
+* **Backend Deployed (Hugging Face Spaces)**: [huggingface.co/spaces/mah-atef-72/reali-backend](https://huggingface.co/spaces/mah-atef-72/reali-backend)
+* **Frontend Deployed (Vercel)**: [reali-meal-demand.vercel.app](https://reali-meal-demand.vercel.app/)
+* **Default Admin Credentials**:
+  * **Username**: `admin`
+  * **Password**: `admin123`
+  * **Email**: `admin@real-i.com`
+
