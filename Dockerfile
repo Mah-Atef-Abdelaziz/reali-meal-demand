@@ -17,11 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend application code
 COPY backend/ ./backend/
 
-# Copy ML models and data if present
-COPY ml/ ./ml/ 2>/dev/null || true
-
-# Copy environment file
-COPY backend/.env ./backend/.env 2>/dev/null || true
+# Copy ML models and data
+COPY ml/ ./ml/
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
