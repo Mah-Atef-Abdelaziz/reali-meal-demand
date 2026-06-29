@@ -10,6 +10,11 @@ from config import settings
 # Determine if we are using SQLite
 is_sqlite = settings.DATABASE_URL.startswith("sqlite")
 
+# Fix asyncpg SSL: asyncpg doesn't support ?sslmode=require, use ssl=True instead
+db_url = settings.DATABASE_URL
+if not is_sqlite and "sslmode=" in db_url:
+    db_url = db_url.split("?sslmode=")[0]  # Strip sslmode param
+
 # Async engine for FastAPI
 engine_kwargs = {"echo": settings.DEBUG}
 if not is_sqlite:
@@ -17,6 +22,7 @@ if not is_sqlite:
         "pool_size": 20,
         "max_overflow": 10,
         "pool_pre_ping": True,
+        "connect_args": {"ssl": True},
     })
 else:
     engine_kwargs.update({
@@ -24,7 +30,7 @@ else:
     })
 
 async_engine = create_async_engine(
-    settings.DATABASE_URL,
+    db_url,
     **engine_kwargs
 )
 
