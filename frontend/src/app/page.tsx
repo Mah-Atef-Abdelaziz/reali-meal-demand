@@ -73,9 +73,10 @@ export default function Home() {
           
           <button 
             onClick={() => setIsSidebarOpen(true)}
-            className="p-2 rounded-lg bg-charcoal-800 text-charcoal-300 hover:text-white hover:bg-charcoal-700 cursor-pointer"
+            className="h-8 w-8 rounded-lg bg-charcoal-800 border border-charcoal-700 text-gold-400 font-bold hover:text-white flex items-center justify-center cursor-pointer"
+            title="Expand Menu"
           >
-            <Menu className="h-5 w-5" />
+            &lt;
           </button>
         </header>
 
