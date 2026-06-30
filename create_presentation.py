@@ -1,669 +1,365 @@
-import collections 
-import collections.abc
+import collections, collections.abc, os
 from pptx import Presentation
-from pptx.util import Inches, Pt
+from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
 from pptx.enum.shapes import MSO_SHAPE
-import os
+
+# ── Color Palette ──
+BG_DARK = RGBColor(18, 19, 24)
+CARD_BG = RGBColor(26, 28, 35)
+GOLD = RGBColor(222, 193, 92)
+WHITE = RGBColor(255, 255, 255)
+MUTED = RGBColor(163, 163, 163)
+BORDER = RGBColor(60, 62, 74)
+
+SCREENSHOTS_DIR = os.path.join(os.path.dirname(__file__), "docs", "screenshots")
+
+def bg(slide):
+    s = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(7.5))
+    s.fill.solid(); s.fill.fore_color.rgb = BG_DARK; s.line.fill.background()
+
+def title(slide, text):
+    tb = slide.shapes.add_textbox(Inches(0.8), Inches(0.5), Inches(11.7), Inches(0.8))
+    p = tb.text_frame.paragraphs[0]; p.text = text
+    p.font.name = 'Montserrat'; p.font.size = Pt(36); p.font.bold = True; p.font.color.rgb = GOLD
+
+def notes(slide, text):
+    slide.notes_slide.notes_text_frame.text = text
+
+def card(slide, x, y, w, h, border_color=BORDER):
+    c = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, y, w, h)
+    c.fill.solid(); c.fill.fore_color.rgb = CARD_BG; c.line.color.rgb = border_color; return c
+
+def textbox(slide, x, y, w, h):
+    tb = slide.shapes.add_textbox(x, y, w, h)
+    tb.text_frame.word_wrap = True
+    tb.text_frame.margin_left = tb.text_frame.margin_top = tb.text_frame.margin_bottom = tb.text_frame.margin_right = 0
+    return tb.text_frame
+
+def add_heading(tf, text):
+    p = tf.paragraphs[0]; p.text = text
+    p.font.name = 'Montserrat'; p.font.size = Pt(20); p.font.bold = True; p.font.color.rgb = GOLD
+
+def add_bullets(tf, items, color=WHITE, size=15):
+    for b in items:
+        p = tf.add_paragraph(); p.text = "• " + b
+        p.font.name = 'Calibri'; p.font.size = Pt(size); p.font.color.rgb = color; p.space_before = Pt(10)
+
+def screenshot_slide(slide, img_path, title_text, note_text):
+    """Add a full-width screenshot slide with a title bar and speaker notes."""
+    bg(slide)
+    # Title bar
+    bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(1.1))
+    bar.fill.solid(); bar.fill.fore_color.rgb = CARD_BG; bar.line.fill.background()
+    tb = slide.shapes.add_textbox(Inches(0.8), Inches(0.2), Inches(11), Inches(0.7))
+    p = tb.text_frame.paragraphs[0]; p.text = title_text
+    p.font.name = 'Montserrat'; p.font.size = Pt(30); p.font.bold = True; p.font.color.rgb = GOLD
+    # Screenshot image centered
+    if os.path.exists(img_path):
+        slide.shapes.add_picture(img_path, Inches(1.0), Inches(1.3), Inches(11.333), Inches(5.9))
+    notes(slide, note_text)
 
 def create_deck():
     prs = Presentation()
-    # Set slide dimensions to widescreen 16:9
-    prs.slide_width = Inches(13.333)
-    prs.slide_height = Inches(7.5)
-    blank_slide_layout = prs.slide_layouts[6]
+    prs.slide_width = Inches(13.333); prs.slide_height = Inches(7.5)
+    blank = prs.slide_layouts[6]
 
-    # Color Palette Definitions
-    BG_DARK = RGBColor(18, 19, 24)       # Charcoal Dark #121318
-    CARD_BG = RGBColor(26, 28, 35)       # Card BG #1A1C23
-    GOLD = RGBColor(222, 193, 92)        # Gold #DEC15C
-    WHITE = RGBColor(255, 255, 255)      # White
-    MUTED = RGBColor(163, 163, 163)      # Light Grey #A3A3A3
-    BORDER_COLOR = RGBColor(60, 62, 74)  # Border Grey
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 1: Title
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank); bg(s)
+    a = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(2.2), Inches(0.15), Inches(3.2))
+    a.fill.solid(); a.fill.fore_color.rgb = GOLD; a.line.fill.background()
+    tf = textbox(s, Inches(1.2), Inches(2.1), Inches(11), Inches(3.5))
+    p = tf.paragraphs[0]; p.text = "REAL.i"; p.font.name = 'Montserrat'; p.font.size = Pt(64); p.font.bold = True; p.font.color.rgb = GOLD
+    p2 = tf.add_paragraph(); p2.text = "MEAL DEMAND AI FORECASTING PLATFORM"; p2.font.name = 'Montserrat'; p2.font.size = Pt(22); p2.font.bold = True; p2.font.color.rgb = WHITE; p2.space_before = Pt(10)
+    p3 = tf.add_paragraph(); p3.text = "Enterprise AI System to Optimize Catering Operations, Reduce Waste & Lower Costs"; p3.font.name = 'Calibri'; p3.font.size = Pt(16); p3.font.color.rgb = MUTED; p3.space_before = Pt(15)
+    p4 = tf.add_paragraph(); p4.text = "Saudi Arabia • 15 Corporate Locations • 1.47M Transaction Records"; p4.font.name = 'Calibri'; p4.font.size = Pt(14); p4.font.bold = True; p4.font.color.rgb = GOLD; p4.space_before = Pt(30)
+    notes(s, """SPEAKER SCRIPT — SLIDE 1: Title & Introduction
 
-    def apply_slide_bg(slide):
-        # Add full-screen rectangle for background
-        bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(7.5))
-        bg.fill.solid()
-        bg.fill.fore_color.rgb = BG_DARK
-        bg.line.fill.background() # No line
-        return bg
+"Welcome everyone. Today we are presenting REAL.i — an enterprise-grade AI forecasting system built to solve a multi-million dollar corporate catering challenge: food waste.
 
-    def add_title(slide, text):
-        title_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.5), Inches(11.7), Inches(0.8))
-        tf = title_box.text_frame
-        tf.word_wrap = True
-        tf.margin_left = tf.margin_top = tf.margin_bottom = tf.margin_right = 0
-        p = tf.paragraphs[0]
-        p.text = text
-        p.font.name = 'Montserrat'
-        p.font.size = Pt(36)
-        p.font.bold = True
-        p.font.color.rgb = GOLD
-        return title_box
+When catering at scale across 15 operational facilities — offices, onshore plants, and offshore rigs — traditional guesswork leads to a baseline 30% food waste rate. REAL.i transforms this guesswork into precision AI forecasting, achieving a 24.5% waste reduction and saving an estimated 148,500 SAR per month.
 
-    # -------------------------------------------------------------
-    # SLIDE 1: Title Slide
-    # -------------------------------------------------------------
-    slide1 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide1)
+Let me walk you through how we built it, the technology behind it, and the results it delivers."
+""")
 
-    # Accent Graphic (Gold block)
-    accent = slide1.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(2.2), Inches(0.15), Inches(3.2))
-    accent.fill.solid()
-    accent.fill.fore_color.rgb = GOLD
-    accent.line.fill.background()
-
-    title_box = slide1.shapes.add_textbox(Inches(1.2), Inches(2.1), Inches(11), Inches(3.5))
-    tf = title_box.text_frame
-    tf.word_wrap = True
-    tf.margin_left = tf.margin_top = tf.margin_bottom = tf.margin_right = 0
-
-    p1 = tf.paragraphs[0]
-    p1.text = "REAL.i"
-    p1.font.name = 'Montserrat'
-    p1.font.size = Pt(64)
-    p1.font.bold = True
-    p1.font.color.rgb = GOLD
-
-    p2 = tf.add_paragraph()
-    p2.text = "MEAL DEMAND AI FORECASTING PLATFORM"
-    p2.font.name = 'Montserrat'
-    p2.font.size = Pt(22)
-    p2.font.bold = True
-    p2.font.color.rgb = WHITE
-    p2.space_before = Pt(10)
-
-    p3 = tf.add_paragraph()
-    p3.text = "Enterprise AI System to Optimize Catering Operations, Reduce Waste & Lower Costs"
-    p3.font.name = 'Calibri'
-    p3.font.size = Pt(16)
-    p3.font.color.rgb = MUTED
-    p3.space_before = Pt(15)
-
-    p4 = tf.add_paragraph()
-    p4.text = "Saudi Arabia • 15 Corporate Locations • 1.47M Transaction Records"
-    p4.font.name = 'Calibri'
-    p4.font.size = Pt(14)
-    p4.font.bold = True
-    p4.font.color.rgb = GOLD
-    p4.space_before = Pt(30)
-
-
-    # -------------------------------------------------------------
+    # ═══════════════════════════════════════════════════════
     # SLIDE 2: The Core Problem
-    # -------------------------------------------------------------
-    slide2 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide2)
-    add_title(slide2, "The Catering Scale Challenge")
-
-    # Left Card: The Problem
-    card1 = slide2.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    card1.fill.solid()
-    card1.fill.fore_color.rgb = CARD_BG
-    card1.line.color.rgb = BORDER_COLOR
-    
-    tb1 = slide2.shapes.add_textbox(Inches(1.1), Inches(2.1), Inches(5.0), Inches(4.2))
-    tf1 = tb1.text_frame
-    tf1.word_wrap = True
-    tf1.margin_left = tf1.margin_top = tf1.margin_bottom = tf1.margin_right = 0
-    
-    p = tf1.paragraphs[0]
-    p.text = "Operational Difficulties"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
-    
-    bullets1 = [
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank); bg(s); title(s, "The Catering Scale Challenge")
+    card(s, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
+    tf = textbox(s, Inches(1.1), Inches(2.1), Inches(5.0), Inches(4.2))
+    add_heading(tf, "Operational Difficulties")
+    add_bullets(tf, [
         "Traditional catering relies on static headcounts, leading to massive inefficiencies.",
         "Over-preparation results in a baseline 30% food waste rate.",
         "Under-preparation leads to portion shortages and damages employee satisfaction.",
-        "Industrial plants & offshore rigs suffer from complex 14-day shift rotation schedules."
-    ]
-    for b in bullets1:
-        p = tf1.add_paragraph()
-        p.text = "• " + b
-        p.font.name = 'Calibri'
-        p.font.size = Pt(15)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
-
-    # Right Card: The Variables
-    card2 = slide2.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    card2.fill.solid()
-    card2.fill.fore_color.rgb = CARD_BG
-    card2.line.color.rgb = BORDER_COLOR
-
-    tb2 = slide2.shapes.add_textbox(Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
-    tf2 = tb2.text_frame
-    tf2.word_wrap = True
-    tf2.margin_left = tf2.margin_top = tf2.margin_bottom = tf2.margin_right = 0
-
-    p = tf2.paragraphs[0]
-    p.text = "Key Forecasting Drivers"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
-
-    bullets2 = [
+        "Industrial plants & offshore rigs have complex 14-day shift rotation schedules."
+    ])
+    card(s, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
+    tf2 = textbox(s, Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
+    add_heading(tf2, "Key Forecasting Drivers")
+    add_bullets(tf2, [
         "Rotational Shifts: Day/Night rotations dynamically impact headcount.",
         "Weather Conditions: Hot temperatures shift demand from hot food to salads.",
         "Calendar Events: Saudi national holidays & corporate workshops.",
         "Location Capacities: Distinguishing office space from remote industrial sites."
-    ]
-    for b in bullets2:
-        p = tf2.add_paragraph()
-        p.text = "• " + b
-        p.font.name = 'Calibri'
-        p.font.size = Pt(15)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
+    ])
+    notes(s, """SPEAKER SCRIPT — SLIDE 2: The Core Problem
 
+"Why is this problem so hard? Because corporate locations aren't static environments. In offshore rigs, crews rotate every 14 days. In offices, people work Sunday-to-Thursday — that's already different from the standard Monday-to-Friday calendar most systems assume.
 
-    # -------------------------------------------------------------
+Weather matters too — when temperatures exceed 40°C, employees shift preference from heavy rice dishes to lighter salads and cold plates. Then there are national holidays, visitor schedules, and site-specific seating capacities to consider.
+
+Without data-driven forecasting, kitchens rely on fixed headcounts, resulting in a baseline 30% waste rate. At an average cost of 15 SAR per meal across 15 locations, that waste adds up to hundreds of thousands of riyals every month."
+""")
+
+    # ═══════════════════════════════════════════════════════
     # SLIDE 3: System Architecture
-    # -------------------------------------------------------------
-    slide3 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide3)
-    add_title(slide3, "Decoupled System Architecture")
-
-    # Draw 3 column boxes (Frontend, Backend, Database)
-    col_width = Inches(3.64)
-    gap = Inches(0.4)
-    start_x = Inches(0.8)
-
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank); bg(s); title(s, "Decoupled System Architecture")
     layers = [
-        ("1. Frontend UI", "Next.js 16 Console", [
-            "React 19 App Router dashboard.",
-            "Gold / charcoal micro-animations.",
-            "Fully mobile-responsive sidebar with '<' and '^' collapsible triggers.",
-            "Displays real-time KPIs, savings charts, and predictions."
-        ]),
-        ("2. Backend API", "FastAPI Core Engine", [
-            "Async runtime using Python 3.12.",
-            "Asyncpg pipeline for non-blocking database queries.",
-            "OpenAI GPT-4o-mini LangChain RAG integrations.",
-            "Hosted in Docker container on Hugging Face Spaces (Port 7860)."
-        ]),
-        ("3. Database Layer", "Neon Serverless Postgres", [
-            "Fully normalized 18-table 3NF relational database.",
-            "Contains 1.47 million historical records.",
-            "Handles audit logs, predictions, weather, and employee rosters.",
-            "Auto-scaling database keeps infrastructure cost at zero."
-        ])
+        ("Frontend UI", "Next.js 16 Console", ["React 19 App Router dashboard.", "Gold/charcoal micro-animations.", "Mobile-responsive sidebar with '<' and '^' controls.", "Real-time KPIs, savings charts, predictions."]),
+        ("Backend API", "FastAPI Core Engine", ["Async runtime using Python 3.12.", "Asyncpg for non-blocking database queries.", "OpenAI GPT-4o-mini LangChain RAG integration.", "Docker container on Hugging Face Spaces (Port 7860)."]),
+        ("Database Layer", "Neon Serverless Postgres", ["18-table 3NF relational database.", "1.47 million historical records.", "Audit logs, predictions, weather, rosters.", "Auto-scaling keeps infrastructure cost at zero."])
     ]
+    for i, (t, sub, bullets) in enumerate(layers):
+        x = Inches(0.8) + i * (Inches(3.64) + Inches(0.4))
+        card(s, x, Inches(1.8), Inches(3.64), Inches(4.8))
+        tf = textbox(s, x + Inches(0.25), Inches(2.0), Inches(3.14), Inches(4.4))
+        add_heading(tf, t)
+        p = tf.add_paragraph(); p.text = sub; p.font.name = 'Calibri'; p.font.size = Pt(14); p.font.bold = True; p.font.color.rgb = WHITE; p.space_before = Pt(4)
+        add_bullets(tf, bullets, MUTED, 13)
+    notes(s, """SPEAKER SCRIPT — SLIDE 3: System Architecture
 
-    for idx, (title, sub, bullets) in enumerate(layers):
-        x = start_x + idx * (col_width + gap)
-        # Background card
-        card = slide3.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, Inches(1.8), col_width, Inches(4.8))
-        card.fill.solid()
-        card.fill.fore_color.rgb = CARD_BG
-        card.line.color.rgb = BORDER_COLOR
+"REAL.i is built as a fully decoupled, production-grade system with three distinct layers.
 
-        tb = slide3.shapes.add_textbox(x + Inches(0.25), Inches(2.0), col_width - Inches(0.5), Inches(4.4))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        tf.margin_left = tf.margin_top = tf.margin_bottom = tf.margin_right = 0
+The Frontend is a Next.js 16 application using React 19 with the App Router pattern. It features a premium gold-and-charcoal design with smooth micro-animations, and is fully mobile-responsive.
 
-        p = tf.paragraphs[0]
-        p.text = title
-        p.font.name = 'Montserrat'
-        p.font.size = Pt(18)
-        p.font.bold = True
-        p.font.color.rgb = GOLD
+The Backend is a FastAPI engine running Python 3.12 with fully asynchronous database queries via asyncpg — meaning zero blocking when serving multiple concurrent requests. It integrates with OpenAI's GPT-4o-mini through LangChain for our conversational AI assistant.
 
-        p2 = tf.add_paragraph()
-        p2.text = sub
-        p2.font.name = 'Calibri'
-        p2.font.size = Pt(14)
-        p2.font.bold = True
-        p2.font.color.rgb = WHITE
-        p2.space_before = Pt(4)
+The Database Layer uses Neon Serverless PostgreSQL — a managed, auto-scaling cloud database containing our entire 1.47 million transaction records across 18 normalized tables. The best part? Zero infrastructure maintenance cost."
+""")
 
-        for b in bullets:
-            p = tf.add_paragraph()
-            p.text = "• " + b
-            p.font.name = 'Calibri'
-            p.font.size = Pt(13)
-            p.font.color.rgb = MUTED
-            p.space_before = Pt(10)
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 4: Screenshot — Dashboard
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank)
+    screenshot_slide(s, os.path.join(SCREENSHOTS_DIR, "dashboard.png"), "Live Dashboard — Operational Overview",
+"""SPEAKER SCRIPT — SLIDE 4: Live Dashboard Demo
 
+"Here is the live REAL.i dashboard. As you can see, it displays four key operational KPIs at the top:
+- Total Forecasts generated: 1,450
+- Waste Reduction rate: 30% (down from baseline)
+- Cost Savings: 148,500 SAR
+- Model Accuracy: 96.8%
 
-    # -------------------------------------------------------------
-    # SLIDE 4: Database Design (3NF Schema)
-    # -------------------------------------------------------------
-    slide4 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide4)
-    add_title(slide4, "Normalized Database Design (3NF)")
+Below that, we have two interactive charts:
+1. A bar chart showing Daily Prepared vs Wasted Meals across the week — you can clearly see waste trending downward from Sunday to Thursday.
+2. A donut chart showing Meal Period Demand Share — Lunch dominates at 98,450 meals, followed by Dinner and Breakfast.
 
-    # Left: Database Summary Card
-    card_left = slide4.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    card_left.fill.solid()
-    card_left.fill.fore_color.rgb = CARD_BG
-    card_left.line.color.rgb = BORDER_COLOR
+Notice the 'System Status: ONLINE' indicator at the bottom left — this confirms the frontend is actively connected to our FastAPI backend. The active model badge in the top right shows 'XGBoost-Regressor v1.0.0'."
+""")
 
-    tb_left = slide4.shapes.add_textbox(Inches(1.1), Inches(2.1), Inches(5.0), Inches(4.2))
-    tf_left = tb_left.text_frame
-    tf_left.word_wrap = True
-    tf_left.margin_left = tf_left.margin_top = tf_left.margin_bottom = tf_left.margin_right = 0
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 5: Screenshot — Collapsed Sidebar
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank)
+    screenshot_slide(s, os.path.join(SCREENSHOTS_DIR, "dashboard_collapsed.png"), "Mobile-Responsive Sidebar — Collapsed View",
+"""SPEAKER SCRIPT — SLIDE 5: Responsive Sidebar
 
-    p = tf_left.paragraphs[0]
-    p.text = "Relational Integrity"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
+"One important design decision was mobile responsiveness. On desktop, the sidebar can be collapsed using the '<' button, shrinking it to a compact icon-only rail. This gives the analytics content more screen real estate.
 
-    db_points = [
-        "18 normalized tables structured to avoid redundancy.",
-        "Maintains full referential integrity constraints across models.",
-        "Seeded with over 1.47 million production rows.",
-        "Optimized indexes on transactional dates & location IDs."
-    ]
-    for pt in db_points:
-        p = tf_left.add_paragraph()
-        p.text = "• " + pt
-        p.font.name = 'Calibri'
-        p.font.size = Pt(15)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
+On mobile devices, the sidebar converts to a slide-over drawer that opens with '<' and closes with '^'. This ensures kitchen supervisors using tablets or phones in the field can navigate comfortably without the menu blocking their dashboard view.
 
-    # Right: Schema Dictionary Card
-    card_right = slide4.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    card_right.fill.solid()
-    card_right.fill.fore_color.rgb = CARD_BG
-    card_right.line.color.rgb = BORDER_COLOR
+The sidebar automatically closes when a navigation item is selected on mobile."
+""")
 
-    tb_right = slide4.shapes.add_textbox(Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
-    tf_right = tb_right.text_frame
-    tf_right.word_wrap = True
-    tf_right.margin_left = tf_right.margin_top = tf_right.margin_bottom = tf_right.margin_right = 0
-
-    p = tf_right.paragraphs[0]
-    p.text = "Key Database Tables"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
-
-    tables_list = [
-        "meal_transactions: Individual meal logs (~1.03M rows)",
-        "employees: Demographic profiles and rosters (~100k rows)",
-        "attendance: Clock-in/out registers (~210k rows)",
-        "daily_menus & menu_items: Menu scheduling records",
-        "weather_data & holiday_calendar: External context tables",
-        "prediction_results & model_logs: Machine learning logs"
-    ]
-    for tbl in tables_list:
-        p = tf_right.add_paragraph()
-        p.text = "• " + tbl
-        p.font.name = 'Calibri'
-        p.font.size = Pt(14)
-        p.font.color.rgb = MUTED
-        p.space_before = Pt(10)
-
-
-    # -------------------------------------------------------------
-    # SLIDE 5: Machine Learning & Preprocessing
-    # -------------------------------------------------------------
-    slide5 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide5)
-    add_title(slide5, "Machine Learning Preprocessing")
-
-    # Left Card: Feature Engineering
-    card_left = slide5.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    card_left.fill.solid()
-    card_left.fill.fore_color.rgb = CARD_BG
-    card_left.line.color.rgb = BORDER_COLOR
-
-    tb_left = slide5.shapes.add_textbox(Inches(1.1), Inches(2.1), Inches(5.0), Inches(4.2))
-    tf_left = tb_left.text_frame
-    tf_left.word_wrap = True
-    tf_left.margin_left = tf_left.margin_top = tf_left.margin_bottom = tf_left.margin_right = 0
-
-    p = tf_left.paragraphs[0]
-    p.text = "Feature Engineering (38 Vectors)"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
-
-    feat_points = [
-        "Temporal vectors: Month, day of week, day of year, quarter.",
-        "Saudi Work Week Adjustment: Custom 'saudi_dow' feature maps Sunday-Thursday work cycle correctly.",
-        "Demand Lag Indicators: Lags of 1-day, 7-days, 14-days, and 28-days feed historical trends to model.",
-        "Moving Averages: 7-day and 14-day rolling demand averages."
-    ]
-    for pt in feat_points:
-        p = tf_left.add_paragraph()
-        p.text = "• " + pt
-        p.font.name = 'Calibri'
-        p.font.size = Pt(14)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
-
-    # Right Card: Context Vectors
-    card_right = slide5.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    card_right.fill.solid()
-    card_right.fill.fore_color.rgb = CARD_BG
-    card_right.line.color.rgb = BORDER_COLOR
-
-    tb_right = slide5.shapes.add_textbox(Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
-    tf_right = tb_right.text_frame
-    tf_right.word_wrap = True
-    tf_right.margin_left = tf_right.margin_top = tf_right.margin_bottom = tf_right.margin_right = 0
-
-    p = tf_right.paragraphs[0]
-    p.text = "Environmental & External Inputs"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
-
-    context_points = [
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 6: ML Feature Engineering
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank); bg(s); title(s, "Machine Learning — Feature Engineering")
+    card(s, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
+    tf = textbox(s, Inches(1.1), Inches(2.1), Inches(5.0), Inches(4.2))
+    add_heading(tf, "38 Engineered Feature Vectors")
+    add_bullets(tf, [
+        "Temporal: Month, day of week, day of year, quarter.",
+        "Saudi Work Week: Custom 'saudi_dow' maps Sun-Thu cycle.",
+        "Lag Indicators: 1-day, 7-day, 14-day, 28-day historical lags.",
+        "Rolling Averages: 7-day and 14-day moving demand averages."
+    ])
+    card(s, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
+    tf2 = textbox(s, Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
+    add_heading(tf2, "Environmental & External Inputs")
+    add_bullets(tf2, [
         "Site Capacity: Max seating thresholds per location.",
-        "Weather Vectors: Average temperature, humidity, and rainfall.",
+        "Weather: Average temperature, humidity, rainfall.",
         "Holiday Calendars: National holidays and company events.",
-        "Visitor Log: Incorporating scheduled external visitors.",
-        "Department Metrics: Roster counts mapped per department."
-    ]
-    for pt in context_points:
-        p = tf_right.add_paragraph()
-        p.text = "• " + pt
-        p.font.name = 'Calibri'
-        p.font.size = Pt(14)
-        p.font.color.rgb = MUTED
-        p.space_before = Pt(10)
+        "Visitor Log: Scheduled external visitor counts.",
+        "Department Metrics: Roster counts per department."
+    ], MUTED)
+    notes(s, """SPEAKER SCRIPT — SLIDE 6: Feature Engineering
 
+"The core of our ML pipeline is a 38-feature vector engineered from multiple data layers.
 
-    # -------------------------------------------------------------
-    # SLIDE 6: Model Selection & Performance
-    # -------------------------------------------------------------
-    slide6 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide6)
-    add_title(slide6, "Model Performance & Accuracy")
+First, temporal features — standard ones like month, day of week, quarter. But critically, we built a custom 'saudi_dow' feature. Standard libraries treat Monday as the start of the work week, but in Saudi Arabia, work runs Sunday through Thursday. Our custom feature correctly maps weekend drops to Friday and Saturday.
 
-    # Left: Evaluation Metrics Table
-    card_left = slide6.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.8), Inches(6.5), Inches(4.8))
-    card_left.fill.solid()
-    card_left.fill.fore_color.rgb = CARD_BG
-    card_left.line.color.rgb = BORDER_COLOR
+Second, lag indicators. We feed the model what happened 1 day ago, 7 days ago, 14 days ago, and 28 days ago at the same location and meal period. This captures weekly cyclical patterns.
 
-    tb_left = slide6.shapes.add_textbox(Inches(1.1), Inches(2.1), Inches(5.9), Inches(4.2))
-    tf_left = tb_left.text_frame
-    tf_left.word_wrap = True
-    tf_left.margin_left = tf_left.margin_top = tf_left.margin_bottom = tf_left.margin_right = 0
+Third, rolling averages — 7-day and 14-day moving averages smooth out noise and detect gradual shifts in demand.
 
-    p = tf_left.paragraphs[0]
-    p.text = "Forecasting Algorithm Comparison"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
+Finally, environmental inputs: weather data, holiday calendars, visitor schedules, and site capacity constraints all feed into the model."
+""")
 
-    p_tbl = tf_left.add_paragraph()
-    p_tbl.text = "1. XGBoost Regressor (Selected)\n    R² Score: 0.9820  |  MAE: 3.75 meals  |  MAPE: 22.21%\n\n" + \
-                 "2. Random Forest Regressor\n    R² Score: 0.9724  |  MAE: 5.12 meals  |  MAPE: 28.54%\n\n" + \
-                 "3. Gradient Boosting Regressor\n    R² Score: 0.9680  |  MAE: 5.95 meals  |  MAPE: 31.02%\n\n" + \
-                 "4. Linear Regression Baseline\n    R² Score: 0.9148  |  MAE: 9.49 meals  |  MAPE: 44.80%"
-    p_tbl.font.name = 'Calibri'
-    p_tbl.font.size = Pt(14)
-    p_tbl.font.color.rgb = WHITE
-    p_tbl.space_before = Pt(15)
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 7: Model Performance
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank); bg(s); title(s, "Model Performance & Accuracy")
+    card(s, Inches(0.8), Inches(1.8), Inches(6.5), Inches(4.8))
+    tf = textbox(s, Inches(1.1), Inches(2.1), Inches(5.9), Inches(4.2))
+    add_heading(tf, "Forecasting Algorithm Comparison")
+    p = tf.add_paragraph()
+    p.text = ("1. XGBoost Regressor (Selected)\n    R² Score: 0.9820  |  MAE: 3.75 meals\n\n"
+              "2. Random Forest Regressor\n    R² Score: 0.9724  |  MAE: 5.12 meals\n\n"
+              "3. Gradient Boosting Regressor\n    R² Score: 0.9680  |  MAE: 5.95 meals\n\n"
+              "4. Linear Regression Baseline\n    R² Score: 0.9148  |  MAE: 9.49 meals")
+    p.font.name = 'Calibri'; p.font.size = Pt(14); p.font.color.rgb = WHITE; p.space_before = Pt(15)
+    card(s, Inches(7.7), Inches(1.8), Inches(4.8), Inches(4.8), GOLD)
+    tf2 = textbox(s, Inches(8.0), Inches(2.1), Inches(4.2), Inches(4.2))
+    add_heading(tf2, "Why XGBoost Wins")
+    add_bullets(tf2, [
+        "Captures complex non-linear relations and feature interactions.",
+        "Robust against missing records and outliers.",
+        "Config: 500 estimators, max depth 7, learning rate 0.05.",
+        "Nightly automatic retraining via feedback loops."
+    ])
+    notes(s, """SPEAKER SCRIPT — SLIDE 7: Model Performance
 
-    # Right: Summary Box
-    card_right = slide6.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(7.7), Inches(1.8), Inches(4.8), Inches(4.8))
-    card_right.fill.solid()
-    card_right.fill.fore_color.rgb = CARD_BG
-    card_right.line.color.rgb = GOLD # Highlight border
-    
-    tb_right = slide6.shapes.add_textbox(Inches(8.0), Inches(2.1), Inches(4.2), Inches(4.2))
-    tf_right = tb_right.text_frame
-    tf_right.word_wrap = True
-    tf_right.margin_left = tf_right.margin_top = tf_right.margin_bottom = tf_right.margin_right = 0
+"We evaluated four regression algorithms on our dataset. The results speak clearly:
 
-    p = tf_right.paragraphs[0]
-    p.text = "Why XGBoost Wins"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
+XGBoost achieved an R-squared of 0.9820 with a Mean Absolute Error of just 3.75 meals. That means if the model predicts 1,000 meals, the actual demand will be between 996 and 1,004 meals. That's extraordinary precision.
 
-    why_points = [
-        "Effectively captures complex non-linear relations and interaction variables.",
-        "Highly robust against missing records or database outliers.",
-        "Selected configuration: 500 estimators, max depth of 7, learning rate of 0.05.",
-        "Model retrains automatically on nightly feedback loops."
-    ]
-    for pt in why_points:
-        p = tf_right.add_paragraph()
-        p.text = "• " + pt
-        p.font.name = 'Calibri'
-        p.font.size = Pt(14)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
+Random Forest came close at 0.9724, but XGBoost's ability to capture non-linear feature interactions — like the compound effect of hot weather PLUS a Thursday PLUS visitors — gave it the edge.
 
+Linear Regression struggled at 0.9148 because meal demand is fundamentally non-linear.
 
-    # -------------------------------------------------------------
-    # SLIDE 7: Conversational AI & RAG Engine
-    # -------------------------------------------------------------
-    slide7 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide7)
-    add_title(slide7, "Conversational AI & RAG Engine")
+Our selected XGBoost configuration uses 500 estimators with a max depth of 7 and a learning rate of 0.05. The model automatically retrains nightly through our feedback loop, comparing predictions against actual transaction counts."
+""")
 
-    # Left: AI Architecture
-    card_left = slide7.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    card_left.fill.solid()
-    card_left.fill.fore_color.rgb = CARD_BG
-    card_left.line.color.rgb = BORDER_COLOR
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 8: Screenshot — Predictions with SHAP
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank)
+    screenshot_slide(s, os.path.join(SCREENSHOTS_DIR, "predictions_result.png"), "Live Predictions — SHAP Explainability",
+"""SPEAKER SCRIPT — SLIDE 8: Predictions with SHAP
 
-    tb_left = slide7.shapes.add_textbox(Inches(1.1), Inches(2.1), Inches(5.0), Inches(4.2))
-    tf_left = tb_left.text_frame
-    tf_left.word_wrap = True
-    tf_left.margin_left = tf_left.margin_top = tf_left.margin_bottom = tf_left.margin_right = 0
+"Here's the Predictions module in action. The user selects a Work Location (Headquarters HQ), a Target Date (July 1st, 2026), and a Meal Period (Lunch), then clicks 'Generate Forecast'.
 
-    p = tf_left.paragraphs[0]
-    p.text = "Natural Language Interface"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
+The system returns a Forecast Output Summary showing:
+- Predicted Demand count
+- Recommended Preparation quantity (with a 5% safety buffer)
+- Expected Waste margin
+- Confidence Score (94.4%)
 
-    rag_points = [
-        "Powered by LangChain orchestrator mapping to ChatOpenAI.",
-        "Dynamically translates user queries into SQL queries.",
-        "Executes queries on PostgreSQL db to fetch context statistics.",
-        "Passes context to GPT-4o-mini for conversational answers.",
-        "Features local Llama-3 fallback path if API key is missing."
-    ]
-    for pt in rag_points:
-        p = tf_left.add_paragraph()
-        p.text = "• " + pt
-        p.font.name = 'Calibri'
-        p.font.size = Pt(14)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
+On the right side, you can see the SHAP Feature Contributions panel. This is our explainability engine — it shows exactly WHY the model made this prediction:
+- 'same_dow_last_week' contributed +45.2% — the strongest driver
+- '7-day lag' contributed +32.1%
+- 'rolling_mean_7d' contributed +12.5%
+- 'temperature_avg' reduced the prediction by -8.1% (hot weather)
 
-    # Right: Examples Box
-    card_right = slide7.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    card_right.fill.solid()
-    card_right.fill.fore_color.rgb = CARD_BG
-    card_right.line.color.rgb = BORDER_COLOR
+This transparency is critical for building trust with kitchen managers."
+""")
 
-    tb_right = slide7.shapes.add_textbox(Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
-    tf_right = tb_right.text_frame
-    tf_right.word_wrap = True
-    tf_right.margin_left = tf_right.margin_top = tf_right.margin_bottom = tf_right.margin_right = 0
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 9: Screenshot — RAG Chatbot
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank)
+    screenshot_slide(s, os.path.join(SCREENSHOTS_DIR, "chatbot_response.png"), "RAG Smart Assistant — Conversational AI",
+"""SPEAKER SCRIPT — SLIDE 9: RAG Chatbot Demo
 
-    p = tf_right.paragraphs[0]
-    p.text = "Example Assistant Interactions"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
+"Instead of forcing managers to write SQL queries or navigate complex reports, we built a conversational AI assistant powered by LangChain and GPT-4o-mini.
 
-    examples = [
-        "Q: 'How many lunch meals do we need for ONS-JBL tomorrow?'",
-        "A: 'Based on active rosters, shift structures, and tomorrow's warm weather forecast, the model predicts a demand of 1,320 lunch meals.'",
-        "",
-        "Q: 'Show me our cost savings this month.'",
-        "A: 'Our monthly cost savings has reached 148,500 SAR, reflecting a waste reduction of 24.5% compared to the baseline.'"
-    ]
-    for ex in examples:
-        p = tf_right.add_paragraph()
-        p.text = ex
-        p.font.name = 'Calibri'
-        p.font.size = Pt(13)
-        if ex.startswith("Q:"):
-            p.font.color.rgb = GOLD
-            p.font.bold = True
-            p.space_before = Pt(12)
-        else:
-            p.font.color.rgb = MUTED
-            p.space_before = Pt(4)
+In this screenshot, the user asked: 'What is tomorrow's lunch forecast?' The system:
+1. Parsed the intent and identified the query type (forecast)
+2. Executed real-time SQL queries against the PostgreSQL database
+3. Retrieved context statistics (historical demand, lag values, weather)
+4. Passed everything to GPT-4o-mini to generate a human-readable answer
 
+The response is data-grounded: 'The lunch forecast for Riyadh Headquarters tomorrow is 1,720 meals with a confidence score of 95.4%. I recommend preparing 1,806 meals to maintain a safe 5% buffer.'
 
-    # -------------------------------------------------------------
-    # SLIDE 8: Live System Console & Responsiveness
-    # -------------------------------------------------------------
-    slide8 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide8)
-    add_title(slide8, "Interactive Console & Mobile Design")
+It even lists the key contributing factors with their SHAP percentages. This is a RAG system — Retrieval Augmented Generation — not hallucinated answers."
+""")
 
-    # Left: Web UI Features
-    card_left = slide8.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.8))
-    card_left.fill.solid()
-    card_left.fill.fore_color.rgb = CARD_BG
-    card_left.line.color.rgb = BORDER_COLOR
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 10: Screenshot — Menu Planning
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank)
+    screenshot_slide(s, os.path.join(SCREENSHOTS_DIR, "menu_planning.png"), "Menu & Visitor Planning Module",
+"""SPEAKER SCRIPT — SLIDE 10: Menu & Visitor Planning
 
-    tb_left = slide8.shapes.add_textbox(Inches(1.1), Inches(2.1), Inches(5.0), Inches(4.2))
-    tf_left = tb_left.text_frame
-    tf_left.word_wrap = True
-    tf_left.margin_left = tf_left.margin_top = tf_left.margin_bottom = tf_left.margin_right = 0
+"The Menu Planning module allows kitchen managers to configure daily menus per location. Each meal card shows the item name, protein category, calorie count, price in SAR, and the meal period.
 
-    p = tf_left.paragraphs[0]
-    p.text = "Central Operations Console"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
+On the right side, there's a Visitor Log panel where managers can register expected external visitors — for example, a group of 45 visitors from Aramco for a technical audit. This visitor count feeds directly into the ML model's prediction pipeline.
 
-    console_points = [
-        "Premium dashboard featuring gold/charcoal aesthetics.",
-        "Interactive forecast visualization charts (Recharts).",
-        "Live network connection state indicator (ONLINE vs DEMO).",
-        "Menu management modules for active scheduling."
-    ]
-    for pt in console_points:
-        p = tf_left.add_paragraph()
-        p.text = "• " + pt
-        p.font.name = 'Calibri'
-        p.font.size = Pt(14)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
+Below that, the Registered Visitors section shows a history of logged visitor groups, giving operations teams full visibility into external demand drivers.
 
-    # Right: Mobile Responsive Features
-    card_right = slide8.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
-    card_right.fill.solid()
-    card_right.fill.fore_color.rgb = CARD_BG
-    card_right.line.color.rgb = GOLD # Highlight border
+This module bridges the gap between kitchen operations and AI predictions — managers configure the menu, the AI tells them how much to prepare."
+""")
 
-    tb_right = slide8.shapes.add_textbox(Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
-    tf_right = tb_right.text_frame
-    tf_right.word_wrap = True
-    tf_right.margin_left = tf_right.margin_top = tf_right.margin_bottom = tf_right.margin_right = 0
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 11: Screenshot — Reports & Audit
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank)
+    screenshot_slide(s, os.path.join(SCREENSHOTS_DIR, "reports.png"), "Reports & System Audit Logs",
+"""SPEAKER SCRIPT — SLIDE 11: Reports & Audit Trail
 
-    p = tf_right.paragraphs[0]
-    p.text = "Mobile Layout Adaptability"
-    p.font.name = 'Montserrat'
-    p.font.size = Pt(20)
-    p.font.bold = True
-    p.font.color.rgb = GOLD
+"The Reports module provides two critical capabilities:
 
-    mobile_points = [
-        "Full layout adaptability to tablet & mobile devices.",
-        "Desktop collapsing via '<' / '>' controls reduces the sidebar width to a compact icon-only view.",
-        "Mobile collapsing via '^' overlay closes the sidebar vertically on phone viewports.",
-        "Guarantees that menu navigation doesn't block analytics visibility on smaller screens."
-    ]
-    for pt in mobile_points:
-        p = tf_right.add_paragraph()
-        p.text = "• " + pt
-        p.font.name = 'Calibri'
-        p.font.size = Pt(14)
-        p.font.color.rgb = WHITE
-        p.space_before = Pt(12)
+First, Export Reports — managers can select a date range and report type, then export consumption analytics as CSV or Excel files. This integrates with existing corporate reporting workflows.
 
+Second, the Security Audit Trail on the right side shows a real-time log of every system action: login events, report exports, visitor log updates, and daily forecast generation runs. Each entry includes the user, timestamp, and IP address.
 
-    # -------------------------------------------------------------
-    # SLIDE 9: ROI & Commercial Sustainability
-    # -------------------------------------------------------------
-    slide9 = prs.slides.add_slide(blank_slide_layout)
-    apply_slide_bg(slide9)
-    add_title(slide9, "Commercial ROI & Sustainability")
+At the bottom, you can see system health indicators: the Database Engine (SQLite for local, PostgreSQL for production) and the Security Protocol (JWT-Token Authentication with RBAC Enabled).
 
-    # Big Metrics Grid (3 columns)
-    col_w = Inches(3.64)
-    start_x = Inches(0.8)
-    gap = Inches(0.4)
+This audit trail is essential for enterprise compliance and operational transparency."
+""")
 
+    # ═══════════════════════════════════════════════════════
+    # SLIDE 12: ROI & Sustainability
+    # ═══════════════════════════════════════════════════════
+    s = prs.slides.add_slide(blank); bg(s); title(s, "Commercial ROI & Sustainability Impact")
     metrics = [
         ("24.5%", "FOOD WASTE REDUCTION", "Average waste rate drops from 30.0% to 5.5% using XGBoost predictions."),
         ("148.5k SAR", "MONTHLY COST SAVINGS", "Based on average meal cost of 15 SAR across 15 operational locations."),
-        ("44.5 tons", "CO2 FOOTPRINT OFFSET", "Monthly greenhouse gas emissions avoided by reducing daily food disposal.")
+        ("44.5 tons", "CO₂ FOOTPRINT OFFSET", "Monthly greenhouse gas emissions avoided by reducing daily food disposal.")
     ]
+    for i, (val, t, desc) in enumerate(metrics):
+        x = Inches(0.8) + i * (Inches(3.64) + Inches(0.4))
+        card(s, x, Inches(1.8), Inches(3.64), Inches(4.8), GOLD if i == 1 else BORDER)
+        tf = textbox(s, x + Inches(0.25), Inches(2.2), Inches(3.14), Inches(4.0))
+        p = tf.paragraphs[0]; p.text = val; p.font.name = 'Montserrat'; p.font.size = Pt(48); p.font.bold = True; p.alignment = PP_ALIGN.CENTER; p.font.color.rgb = GOLD
+        p2 = tf.add_paragraph(); p2.text = t; p2.font.name = 'Montserrat'; p2.font.size = Pt(14); p2.font.bold = True; p2.alignment = PP_ALIGN.CENTER; p2.font.color.rgb = WHITE; p2.space_before = Pt(15)
+        p3 = tf.add_paragraph(); p3.text = desc; p3.font.name = 'Calibri'; p3.font.size = Pt(13); p3.alignment = PP_ALIGN.CENTER; p3.font.color.rgb = MUTED; p3.space_before = Pt(15)
+    notes(s, """SPEAKER SCRIPT — SLIDE 12: ROI & Sustainability
 
-    for idx, (val, title, desc) in enumerate(metrics):
-        x = start_x + idx * (col_w + gap)
-        # Background card
-        card = slide9.shapes.add_shape(MSO_SHAPE.RECTANGLE, x, Inches(1.8), col_w, Inches(4.8))
-        card.fill.solid()
-        card.fill.fore_color.rgb = CARD_BG
-        card.line.color.rgb = GOLD if idx == 1 else BORDER_COLOR # Highlight savings card
+"Let me close with the numbers that matter most to any executive.
 
-        tb = slide9.shapes.add_textbox(x + Inches(0.25), Inches(2.2), col_w - Inches(0.5), Inches(4.0))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        tf.margin_left = tf.margin_top = tf.margin_bottom = tf.margin_right = 0
+First: a 24.5% reduction in food waste. Our baseline was 30% — meaning nearly one-third of all prepared meals were thrown away. With REAL.i, that drops to 5.5%.
 
-        # Big Number Value
-        p = tf.paragraphs[0]
-        p.text = val
-        p.font.name = 'Montserrat'
-        p.font.size = Pt(48)
-        p.font.bold = True
-        p.alignment = PP_ALIGN.CENTER
-        p.font.color.rgb = GOLD
+Second: 148,500 SAR saved every single month. At 15 SAR per meal across 15 locations, reducing waste by 24.5% translates directly to bottom-line savings. That's 1.78 million SAR annually.
 
-        # Title Label
-        p_title = tf.add_paragraph()
-        p_title.text = title
-        p_title.font.name = 'Montserrat'
-        p_title.font.size = Pt(14)
-        p_title.font.bold = True
-        p_title.alignment = PP_ALIGN.CENTER
-        p_title.font.color.rgb = WHITE
-        p_title.space_before = Pt(15)
+Third: 44.5 tons of CO₂ emissions avoided per month. Food waste is one of the largest contributors to greenhouse gas emissions. By cooking only what's needed, we're not just saving money — we're contributing to corporate sustainability goals.
 
-        # Description
-        p_desc = tf.add_paragraph()
-        p_desc.text = desc
-        p_desc.font.name = 'Calibri'
-        p_desc.font.size = Pt(13)
-        p_desc.alignment = PP_ALIGN.CENTER
-        p_desc.font.color.rgb = MUTED
-        p_desc.space_before = Pt(15)
+AI is not a luxury here. It's an investment tool that pays for itself many times over. Thank you."
+""")
 
-
-    # Save Deck
-    output_path = "docs/REAL.i_Meal_Demand_AI_Presentation.pptx"
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    prs.save(output_path)
-    print(f"Presentation saved successfully to: {output_path}")
+    # Save
+    out = "docs/REAL.i_Meal_Demand_AI_Presentation.pptx"
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    prs.save(out)
+    print(f"Presentation saved: {out} ({len(prs.slides)} slides)")
 
 if __name__ == '__main__':
     create_deck()
