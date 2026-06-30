@@ -26,7 +26,7 @@ pinned: false
 
 ## Overview
 
-REAL.i is a full-stack enterprise AI system designed to predict daily meal demand across 15 operational facilities (offices, onshore plants, and offshore platforms). It reduces food waste by **24.5%**, saves an estimated **148,500 SAR/month**, and provides explainable predictions through an integrated SHAP-powered analytics dashboard and RAG-based conversational AI assistant.
+REAL.i is a full-stack enterprise AI system designed to predict daily meal demand across 15 operational facilities (offices, industrial sites, and field locations). It reduces food waste by **24.5%**, saves an estimated **148,500 EGP/month**, and provides explainable predictions through an integrated SHAP-powered analytics dashboard and RAG-based conversational AI assistant.
 
 ## Architecture
 

@@ -75,12 +75,12 @@ def create_deck():
     p = tf.paragraphs[0]; p.text = "REAL.i"; p.font.name = 'Montserrat'; p.font.size = Pt(64); p.font.bold = True; p.font.color.rgb = GOLD
     p2 = tf.add_paragraph(); p2.text = "MEAL DEMAND AI FORECASTING PLATFORM"; p2.font.name = 'Montserrat'; p2.font.size = Pt(22); p2.font.bold = True; p2.font.color.rgb = WHITE; p2.space_before = Pt(10)
     p3 = tf.add_paragraph(); p3.text = "Enterprise AI System to Optimize Catering Operations, Reduce Waste & Lower Costs"; p3.font.name = 'Calibri'; p3.font.size = Pt(16); p3.font.color.rgb = MUTED; p3.space_before = Pt(15)
-    p4 = tf.add_paragraph(); p4.text = "Saudi Arabia • 15 Corporate Locations • 1.47M Transaction Records"; p4.font.name = 'Calibri'; p4.font.size = Pt(14); p4.font.bold = True; p4.font.color.rgb = GOLD; p4.space_before = Pt(30)
+    p4 = tf.add_paragraph(); p4.text = "Egypt • 15 Corporate Locations • 1.47M Transaction Records"; p4.font.name = 'Calibri'; p4.font.size = Pt(14); p4.font.bold = True; p4.font.color.rgb = GOLD; p4.space_before = Pt(30)
     notes(s, """SPEAKER SCRIPT — SLIDE 1: Title & Introduction
 
 "Welcome everyone. Today we are presenting REAL.i — an enterprise-grade AI forecasting system built to solve a multi-million dollar corporate catering challenge: food waste.
 
-When catering at scale across 15 operational facilities — offices, onshore plants, and offshore rigs — traditional guesswork leads to a baseline 30% food waste rate. REAL.i transforms this guesswork into precision AI forecasting, achieving a 24.5% waste reduction and saving an estimated 148,500 SAR per month.
+When catering at scale across 15 operational facilities — offices, industrial plants, and field sites — traditional guesswork leads to a baseline 30% food waste rate. REAL.i transforms this guesswork into precision AI forecasting, achieving a 24.5% waste reduction and saving an estimated 148,500 EGP per month.
 
 Let me walk you through how we built it, the technology behind it, and the results it delivers."
 """)
@@ -96,7 +96,7 @@ Let me walk you through how we built it, the technology behind it, and the resul
         "Traditional catering relies on static headcounts, leading to massive inefficiencies.",
         "Over-preparation results in a baseline 30% food waste rate.",
         "Under-preparation leads to portion shortages and damages employee satisfaction.",
-        "Industrial plants & offshore rigs have complex 14-day shift rotation schedules."
+        "Industrial plants & field sites have complex 14-day shift rotation schedules."
     ])
     card(s, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8))
     tf2 = textbox(s, Inches(7.1), Inches(2.1), Inches(5.1), Inches(4.2))
@@ -104,16 +104,16 @@ Let me walk you through how we built it, the technology behind it, and the resul
     add_bullets(tf2, [
         "Rotational Shifts: Day/Night rotations dynamically impact headcount.",
         "Weather Conditions: Hot temperatures shift demand from hot food to salads.",
-        "Calendar Events: Saudi national holidays & corporate workshops.",
+        "Calendar Events: Egyptian national holidays & corporate workshops.",
         "Location Capacities: Distinguishing office space from remote industrial sites."
     ])
     notes(s, """SPEAKER SCRIPT — SLIDE 2: The Core Problem
 
-"Why is this problem so hard? Because corporate locations aren't static environments. In offshore rigs, crews rotate every 14 days. In offices, people work Sunday-to-Thursday — that's already different from the standard Monday-to-Friday calendar most systems assume.
+"Why is this problem so hard? Because corporate locations aren't static environments. In field sites, crews rotate every 14 days. In offices, people work Sunday-to-Thursday — that's already different from the standard Monday-to-Friday calendar most systems assume.
 
 Weather matters too — when temperatures exceed 40°C, employees shift preference from heavy rice dishes to lighter salads and cold plates. Then there are national holidays, visitor schedules, and site-specific seating capacities to consider.
 
-Without data-driven forecasting, kitchens rely on fixed headcounts, resulting in a baseline 30% waste rate. At an average cost of 15 SAR per meal across 15 locations, that waste adds up to hundreds of thousands of riyals every month."
+Without data-driven forecasting, kitchens rely on fixed headcounts, resulting in a baseline 30% waste rate. At an average cost of 15 EGP per meal across 15 locations, that waste adds up to hundreds of thousands of pounds every month."
 """)
 
     # ═══════════════════════════════════════════════════════
@@ -153,7 +153,7 @@ The Database Layer uses Neon Serverless PostgreSQL — a managed, auto-scaling c
 "Here is the live REAL.i dashboard. As you can see, it displays four key operational KPIs at the top:
 - Total Forecasts generated: 1,450
 - Waste Reduction rate: 30% (down from baseline)
-- Cost Savings: 148,500 SAR
+- Cost Savings: 148,500 EGP
 - Model Accuracy: 96.8%
 
 Below that, we have two interactive charts:
@@ -186,7 +186,7 @@ The sidebar automatically closes when a navigation item is selected on mobile."
     add_heading(tf, "38 Engineered Feature Vectors")
     add_bullets(tf, [
         "Temporal: Month, day of week, day of year, quarter.",
-        "Saudi Work Week: Custom 'saudi_dow' maps Sun-Thu cycle.",
+        "Egypt Work Week: Custom 'egypt_dow' maps Sun-Thu cycle.",
         "Lag Indicators: 1-day, 7-day, 14-day, 28-day historical lags.",
         "Rolling Averages: 7-day and 14-day moving demand averages."
     ])
@@ -204,7 +204,7 @@ The sidebar automatically closes when a navigation item is selected on mobile."
 
 "The core of our ML pipeline is a 38-feature vector engineered from multiple data layers.
 
-First, temporal features — standard ones like month, day of week, quarter. But critically, we built a custom 'saudi_dow' feature. Standard libraries treat Monday as the start of the work week, but in Saudi Arabia, work runs Sunday through Thursday. Our custom feature correctly maps weekend drops to Friday and Saturday.
+First, temporal features — standard ones like month, day of week, quarter. But critically, we built a custom 'egypt_dow' feature. Standard libraries treat Monday as the start of the work week, but in Egypt, work runs Sunday through Thursday. Our custom feature correctly maps weekend drops to Friday and Saturday.
 
 Second, lag indicators. We feed the model what happened 1 day ago, 7 days ago, 14 days ago, and 28 days ago at the same location and meal period. This captures weekly cyclical patterns.
 
@@ -287,7 +287,7 @@ In this screenshot, the user asked: 'What is tomorrow's lunch forecast?' The sys
 3. Retrieved context statistics (historical demand, lag values, weather)
 4. Passed everything to GPT-4o-mini to generate a human-readable answer
 
-The response is data-grounded: 'The lunch forecast for Riyadh Headquarters tomorrow is 1,720 meals with a confidence score of 95.4%. I recommend preparing 1,806 meals to maintain a safe 5% buffer.'
+The response is data-grounded: 'The lunch forecast for Cairo Headquarters tomorrow is 1,720 meals with a confidence score of 95.4%. I recommend preparing 1,806 meals to maintain a safe 5% buffer.'
 
 It even lists the key contributing factors with their SHAP percentages. This is a RAG system — Retrieval Augmented Generation — not hallucinated answers."
 """)
@@ -299,9 +299,9 @@ It even lists the key contributing factors with their SHAP percentages. This is 
     screenshot_slide(s, os.path.join(SCREENSHOTS_DIR, "menu_planning.png"), "Menu & Visitor Planning Module",
 """SPEAKER SCRIPT — SLIDE 10: Menu & Visitor Planning
 
-"The Menu Planning module allows kitchen managers to configure daily menus per location. Each meal card shows the item name, protein category, calorie count, price in SAR, and the meal period.
+"The Menu Planning module allows kitchen managers to configure daily menus per location. Each meal card shows the item name, protein category, calorie count, price in EGP, and the meal period.
 
-On the right side, there's a Visitor Log panel where managers can register expected external visitors — for example, a group of 45 visitors from Aramco for a technical audit. This visitor count feeds directly into the ML model's prediction pipeline.
+On the right side, there's a Visitor Log panel where managers can register expected external visitors — for example, a group of 45 visitors from EGPC for a technical audit. This visitor count feeds directly into the ML model's prediction pipeline.
 
 Below that, the Registered Visitors section shows a history of logged visitor groups, giving operations teams full visibility into external demand drivers.
 
@@ -332,7 +332,7 @@ This audit trail is essential for enterprise compliance and operational transpar
     s = prs.slides.add_slide(blank); bg(s); title(s, "Commercial ROI & Sustainability Impact")
     metrics = [
         ("24.5%", "FOOD WASTE REDUCTION", "Average waste rate drops from 30.0% to 5.5% using XGBoost predictions."),
-        ("148.5k SAR", "MONTHLY COST SAVINGS", "Based on average meal cost of 15 SAR across 15 operational locations."),
+        ("148.5k EGP", "MONTHLY COST SAVINGS", "Based on average meal cost of 15 EGP across 15 operational locations."),
         ("44.5 tons", "CO₂ FOOTPRINT OFFSET", "Monthly greenhouse gas emissions avoided by reducing daily food disposal.")
     ]
     for i, (val, t, desc) in enumerate(metrics):
@@ -348,7 +348,7 @@ This audit trail is essential for enterprise compliance and operational transpar
 
 First: a 24.5% reduction in food waste. Our baseline was 30% — meaning nearly one-third of all prepared meals were thrown away. With REAL.i, that drops to 5.5%.
 
-Second: 148,500 SAR saved every single month. At 15 SAR per meal across 15 locations, reducing waste by 24.5% translates directly to bottom-line savings. That's 1.78 million SAR annually.
+Second: 148,500 EGP saved every single month. At 15 EGP per meal across 15 locations, reducing waste by 24.5% translates directly to bottom-line savings. That's 1.78 million EGP annually.
 
 Third: 44.5 tons of CO₂ emissions avoided per month. Food waste is one of the largest contributors to greenhouse gas emissions. By cooking only what's needed, we're not just saving money — we're contributing to corporate sustainability goals.
 

@@ -23,8 +23,8 @@ class MealPeriod(str, enum.Enum):
 
 class LocationType(str, enum.Enum):
     office = "office"
-    offshore = "offshore"
-    onshore = "onshore"
+    field = "field"
+    industrial = "industrial"
 
 class ShiftType(str, enum.Enum):
     morning = "morning"
@@ -53,7 +53,7 @@ class WorkLocation(Base):
     code = Column(String(20), unique=True, nullable=False)
     location_type = Column(String(20), nullable=False)
     city = Column(String(100))
-    country = Column(String(100), default="Saudi Arabia")
+    country = Column(String(100), default="Egypt")
     capacity = Column(Integer, default=500)
     is_active = Column(Boolean, default=True)
     latitude = Column(Numeric(10, 7))

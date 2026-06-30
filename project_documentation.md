@@ -6,11 +6,11 @@ Welcome to the comprehensive technical documentation for **REAL.i**, the enterpr
 
 ## 1. Executive Summary & Value Proposition
 
-REAL.i operates across **15 corporate locations** (including corporate offices, onshore industrial plants, and offshore platforms) to predict daily meal demand for three periods: **Breakfast, Lunch, and Dinner**.
+REAL.i operates across **15 corporate locations** (including corporate offices, industrial plants, and field sites) to predict daily meal demand for three periods: **Breakfast, Lunch, and Dinner**.
 
 ### Key Achievements:
 * **Waste Reduction**: Reduces food waste by **24.5%** on average.
-* **Cost Optimization**: Saves approximately **148,500 SAR/month** (based on an average meal cost of 15 SAR).
+* **Cost Optimization**: Saves approximately **148,500 EGP/month** (based on an average meal cost of 15 EGP).
 * **High-Accuracy ML Model**: Built on an XGBoost Regression architecture delivering an **R² = 0.9820** and an MAE of **3.75 meals**.
 * **Explainability**: Integrated SHAP values explain forecasting criteria in natural language.
 * **Conversational AI**: A LangChain-powered RAG assistant queries database aggregates and forecast predictions in real-time.
@@ -60,7 +60,7 @@ erDiagram
 
 ### Table Dictionary & Columns
 1. **`departments`**: Core organizational departments. (ID, name, code, head_name)
-2. **`work_locations`**: Offices, onshore, and offshore platforms. (ID, name, code, location_type, capacity, coordinates)
+2. **`work_locations`**: Offices, field, and industrial sites. (ID, name, code, location_type, capacity, coordinates)
 3. **`employees`**: Normalized employees records (~100K). (ID, employee_number, email, grade, age, shift, dietary_preference)
 4. **`meal_types`**: Meal catalogs. (ID, name, category, temperature, period, estimated_cost)
 5. **`daily_menus`**: Daily menu schedule per location. (ID, menu_date, location_id, notes)
@@ -68,7 +68,7 @@ erDiagram
 7. **`attendance`**: Daily check-in/out logs (~210K). (ID, employee_id, attendance_date, is_present, check_in/out)
 8. **`meal_transactions`**: Individual meal orders (~1.03M rows). (ID, employee_id, transaction_date, period, meal_type_id, location_id, was_wasted)
 9. **`weather_data`**: Historical location weather (~11K). (ID, location_id, weather_date, temp_avg, humidity, precipitation)
-10. **`holiday_calendar`**: Saudi national and company holiday calendar. (ID, holiday_date, name, is_national)
+10. **`holiday_calendar`**: Egyptian national and company holiday calendar. (ID, holiday_date, name, is_national)
 11. **`company_events`**: Events affecting employee counts. (ID, event_date, name, expected_attendees)
 12. **`visitors`**: Scheduled site visitors. (ID, visit_date, location_id, visitor_count, purpose)
 13. **`prediction_results`**: Historical ML inference logs. (ID, prediction_date, location_id, period, predicted_count, actual_count, confidence_score, predicted_waste, features_used, shap_explanation)
@@ -83,7 +83,7 @@ erDiagram
 
 ### Feature Engineering (38 Features)
 Features are computed dynamically across multiple layers:
-1. **Temporal Features**: Year, month, day, day of week, day of year, week of year, quarter, is_weekend, and `saudi_dow` (adjusted Sunday-Thursday shift).
+1. **Temporal Features**: Year, month, day, day of week, day of year, week of year, quarter, is_weekend, and `egypt_dow` (adjusted Sunday-Thursday shift).
 2. **Lag Indicators**: 1-day, 7-day, 14-day, and 28-day lags (`lag_1d`, `lag_7d`, `lag_14d`, `lag_28d`) of meal transactions.
 3. **Rolling Averages**: 7-day and 14-day moving averages of demand per location.
 4. **Context Features**: Location capacity, shift type distribution, visitor counts, weather conditions (average temperature, precipitation), and national holiday flags.

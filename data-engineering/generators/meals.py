@@ -74,12 +74,12 @@ def generate_attendance_and_meals(employees_df: pd.DataFrame,
         for d in month_dates:
             date_str = d.strftime("%Y-%m-%d")
             dow = d.weekday()  # 0=Mon ... 6=Sun; convert to our scheme
-            # Python weekday: Mon=0..Sun=6; Saudi: Sun=0 is first workday
+            # Python weekday: Mon=0..Sun=6; Egypt: Sun=0 is first workday
             # Map: Sun(6)->0, Mon(0)->1, Tue(1)->2, Wed(2)->3, Thu(3)->4, Fri(4)->5, Sat(5)->6
-            saudi_dow = (dow + 2) % 7
-            dow_mult = DOW_MULTIPLIERS.get(saudi_dow, 1.0)
+            egypt_dow = (dow + 2) % 7
+            dow_mult = DOW_MULTIPLIERS.get(egypt_dow, 1.0)
             is_holiday = d in HOLIDAY_DATES
-            is_weekend = saudi_dow in (5, 6)
+            is_weekend = egypt_dow in (5, 6)
 
             # For each location, determine who attends
             for loc_id in range(1, len(LOCATIONS) + 1):

@@ -29,16 +29,16 @@ export const mockData = {
     getSummary: () => ({
       total_predictions: 1450,
       average_confidence: 0.942,
-      saved_cost_sar: 148500.0,
+      saved_cost_egp: 148500.0,
       waste_reduction_percent: 24.5,
       actual_vs_predicted_accuracy: 96.8,
     }),
     getLocationCapacity: () => [
-      { location: 'HQ-RYD', capacity: 2000, demand: 1680 },
-      { location: 'OFF-JED', capacity: 800, demand: 620 },
-      { location: 'ONS-JBL', capacity: 1500, demand: 1320 },
-      { location: 'OFS-SHB', capacity: 600, demand: 540 },
-      { location: 'ONS-YNB', capacity: 1200, demand: 980 },
+      { location: 'HQ-CAI', capacity: 2000, demand: 1680 },
+      { location: 'OFF-ALX', capacity: 800, demand: 620 },
+      { location: 'IND-ASK', capacity: 1500, demand: 1320 },
+      { location: 'FLD-RSG', capacity: 600, demand: 540 },
+      { location: 'IND-BRG', capacity: 1200, demand: 980 },
     ],
     getPeriodShares: () => [
       { period: 'Breakfast', count: 32540, color: '#dec15c' },
@@ -97,9 +97,9 @@ export const mockData = {
       let response = "I'm REAL.i Assistant. I can help analyze meal consumption patterns, view predictions, or generate reports.";
       
       if (lower.includes('forecast') || lower.includes('predict')) {
-        response = "Based on the XGBoost model, the lunch forecast for Riyadh Headquarters tomorrow is **1,720 meals** (confidence score: **95.4%**). I recommend preparing 1,800 meals to maintain a safe 5% buffer.";
+        response = "Based on the XGBoost model, the lunch forecast for Cairo Headquarters tomorrow is **1,720 meals** (confidence score: **95.4%**). I recommend preparing 1,800 meals to maintain a safe 5% buffer.";
       } else if (lower.includes('waste') || lower.includes('wasted')) {
-        response = "Total food waste has decreased by **24.5%** since deployment. The onshore plants (Jubail, Yanbu) showed the highest waste reduction after adjusting daily menus.";
+        response = "Total food waste has decreased by **24.5%** since deployment. The industrial plants (Ain Sokhna, Borg El-Arab) showed the highest waste reduction after adjusting daily menus.";
       } else if (lower.includes('menu') || lower.includes('recommend')) {
         response = "For high-temperature days (above 40°C), I recommend lighter items: Grilled Chicken Salad, Fruit Platters, and Fish Fillets. These see 12-18% higher demand during hot weather compared to heavy rice dishes.";
       }

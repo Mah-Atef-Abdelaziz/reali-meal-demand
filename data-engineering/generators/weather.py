@@ -22,7 +22,7 @@ def generate_weather() -> pd.DataFrame:
     row_id = 1
 
     for loc_idx, (name, code, ltype, city, cap) in enumerate(LOCATIONS, 1):
-        profile = WEATHER_PROFILES.get(city, WEATHER_PROFILES["Riyadh"])
+        profile = WEATHER_PROFILES.get(city, WEATHER_PROFILES["Cairo"])
 
         for d in dates:
             # Seasonal temperature interpolation

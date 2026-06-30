@@ -19,17 +19,17 @@ This guide outlines exactly how to present the **REAL.i Meal Demand AI Platform*
 * **Slide Visual**: A sleek slide with the REAL.i brand mark, showing a modern corporate cafeteria layout.
 * **Core Talking Points**:
   * Introduce yourself and the REAL.i platform.
-  * Start with a question: *"If you run a kitchen catering to 10,000 corporate employees across offices, onshore plants, and offshore platforms, how do you decide how many meals to cook tomorrow morning?"*
+  * Start with a question: *"If you run a kitchen catering to 10,000 corporate employees across offices, industrial sites, and field locations, how do you decide how many meals to cook tomorrow morning?"*
 * **Speaker Script**:
   > "Welcome everyone. Today we are exploring a real-world, full-stack AI system built to solve a multi-million dollar corporate catering issue: food waste. When catering at scale, guessing leads to a baseline 30% waste rate, costing companies massive budgets. We built REAL.i to turn guessing into a high-precision forecasting operation."
 
 #### Slide 2: The Operational Complexity Matrix
-* **Slide Visual**: A map of 15 corporate locations indicating Offices, Onshore Plants, and Offshore Rigs.
+* **Slide Visual**: A map of 15 corporate locations indicating Offices, Industrial Sites, and Field Locations.
 * **Core Talking Points**:
   * Show why traditional static headcounts fail.
-  * Detail variables: rotating shifts (day/night), temperature (weather changes meal preference), Saudi holiday calendars, visitor schedules, and location-specific seating capacities.
+  * Detail variables: rotating shifts (day/night), temperature (weather changes meal preference), Egyptian holiday calendars, visitor schedules, and location-specific seating capacities.
 * **Speaker Script**:
-  > "Why is this hard? Because corporate locations aren't static. In offshore rigs, crews rotate every 14 days. In offices, people work Sunday-Thursday, but weather patterns like hot summer days change preference from hot stews to cold salads. Visitors come and go. REAL.i processes 38 distinct features to capture all of this complexity."
+  > "Why is this hard? Because corporate locations aren't static. In field sites, crews rotate every 14 days. In offices, people work Sunday-Thursday, but weather patterns like hot summer days change preference from hot stews to cold salads. Visitors come and go. REAL.i processes 38 distinct features to capture all of this complexity."
 
 ---
 
@@ -57,13 +57,13 @@ This guide outlines exactly how to present the **REAL.i Meal Demand AI Platform*
 
 ### Section 3: Machine Learning & Feature Engineering (15 Minutes)
 
-#### Slide 5: Feature Engineering & The "Saudi Week" Shift
-* **Slide Visual**: A list of the 38 engineered features, highlighting `saudi_dow`, lag variables, and rolling moving averages.
+#### Slide 5: Feature Engineering & The "Egyptian Week" Shift
+* **Slide Visual**: A list of the 38 engineered features, highlighting `egypt_dow`, lag variables, and rolling moving averages.
 * **Core Talking Points**:
-  * Explain the custom `saudi_dow` feature (adapting standard weekday logic to Sunday-Thursday).
+  * Explain the custom `egypt_dow` feature (adapting standard weekday logic to Sunday-Thursday).
   * Discuss Lags (`lag_1d`, `lag_7d`) and Moving Averages.
 * **Speaker Script**:
-  > "Standard machine learning libraries evaluate weekdays from Monday to Sunday. However, corporate shifts in Saudi Arabia follow a Sunday-Thursday pattern. We engineered a custom 'saudi_dow' feature to ensure the model understands weekend drops correctly. We also feed the model lag indicators—what did people eat yesterday, and last week?—and rolling averages to detect shifting seasonal baselines."
+  > "Standard machine learning libraries evaluate weekdays from Monday to Sunday. However, corporate shifts in Egypt follow a Sunday-Thursday pattern. We engineered a custom 'egypt_dow' feature to ensure the model understands weekend drops correctly. We also feed the model lag indicators—what did people eat yesterday, and last week?—and rolling averages to detect shifting seasonal baselines."
 
 #### Slide 6: Model Selection & XGBoost Superiority
 * **Slide Visual**: A chart comparing XGBoost ($R^2$: 0.982, MAE: 3.75) against Random Forest and Linear Regression.
@@ -99,11 +99,11 @@ This guide outlines exactly how to present the **REAL.i Meal Demand AI Platform*
   > "Let's look at the live application. The UI features a premium, charcoal-and-gold color theme. It is fully mobile-responsive—users can collapse the sidebar using the '<' button on desktop, or slide it away with '^' on mobile. If the backend is loading, it transitions into DEMO MODE, ensuring zero downtime for kitchen staff."
 
 #### Slide 9: Commercial ROI & Sustainability Impact
-* **Slide Visual**: Big bold numbers: **-24.5% Waste**, **148,500 SAR Saved/Month**, **44,550 kg CO₂ Saved/Month**.
+* **Slide Visual**: Big bold numbers: **-24.5% Waste**, **148,500 EGP Saved/Month**, **44,550 kg CO₂ Saved/Month**.
 * **Core Talking Points**:
   * The bottom line: How AI creates measurable financial and environmental value.
 * **Speaker Script**:
-  > "Ultimately, this platform is an ROI generator. A 24.5% reduction in food waste translates to 148,500 SAR saved every month, while offsetting carbon emissions by 44 tons per month. AI makes sustainability financially profitable."
+  > "Ultimately, this platform is an ROI generator. A 24.5% reduction in food waste translates to 148,500 EGP saved every month, while offsetting carbon emissions by 44 tons per month. AI makes sustainability financially profitable."
 
 ---
 

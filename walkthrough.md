@@ -9,7 +9,7 @@ We have fully implemented, tested, and integrated the **REAL.i AI-Powered Meal D
 - **Database Seeding**: Bulk loaded **1,470,238 records** (3NF normalized) into local SQLite database (`meal_demand.db`) matching production PostgreSQL structure.
 
 ### 2. Machine Learning Core (XGBoost & SHAP)
-- **Feature Engineering**: Engineered 38 lag, rolling statistical, weather, and Saudi holiday features in `ml/preprocessing.py`.
+- **Feature Engineering**: Engineered 38 lag, rolling statistical, weather, and Egyptian holiday features in `ml/preprocessing.py`.
 - **Model Comparison & Tuning**: Trained and compared XGBoost, Random Forest, and Linear Regression. XGBoost achieved a premium **R² of 0.9820** and **MAE of 3.75 meals**.
 - **Model Explainability**: Generated global and local SHAP feature importance vectors for explaining forecast decisions.
 

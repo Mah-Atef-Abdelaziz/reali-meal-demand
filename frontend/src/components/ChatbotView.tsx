@@ -32,7 +32,7 @@ export default function ChatbotView() {
     {
       id: 'welcome',
       role: 'assistant',
-      content: "Hello! I am **REAL.i Smart Assistant**. I am integrated with your meal demand database and predictive machine learning models.\n\nYou can ask me questions like:\n* *\"What is the forecasted lunch demand for Riyadh HQ tomorrow?\"*\n* *\"How much did we save in food waste cost this week?\"*\n* *\"Recommend a menu configuration based on weather forecasts.\"*",
+      content: "Hello! I am **REAL.i Smart Assistant**. I am integrated with your meal demand database and predictive machine learning models.\n\nYou can ask me questions like:\n* *\"What is the forecasted lunch demand for Cairo HQ tomorrow?\"*\n* *\"How much did we save in food waste cost this week?\"*\n* *\"Recommend a menu configuration based on weather forecasts.\"*",
       created_at: new Date().toISOString()
     }
   ]);

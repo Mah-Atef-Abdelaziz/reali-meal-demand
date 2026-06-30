@@ -7,7 +7,7 @@ async def test_dashboard_summary(client):
     data = response.json()
     assert "total_predictions" in data
     assert "average_confidence" in data
-    assert "saved_cost_sar" in data
+    assert "saved_cost_egp" in data
     assert "waste_reduction_percent" in data
 
 @pytest.mark.asyncio

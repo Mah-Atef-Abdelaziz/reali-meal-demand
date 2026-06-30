@@ -12,8 +12,8 @@ import {
 } from 'lucide-react';
 
 const AUDIT_LOGS = [
-  { id: 1, user: 'admin', action: 'EXPORT_REPORT', details: 'Exported consumption report for HQ-RYD', time: '10 mins ago', ip: '192.168.1.45' },
-  { id: 2, user: 'admin', action: 'UPDATE_VISITOR_LOG', details: 'Added visitor log for Aramco (+45)', time: '2 hours ago', ip: '192.168.1.45' },
+  { id: 1, user: 'admin', action: 'EXPORT_REPORT', details: 'Exported consumption report for HQ-CAI', time: '10 mins ago', ip: '192.168.1.45' },
+  { id: 2, user: 'admin', action: 'UPDATE_VISITOR_LOG', details: 'Added visitor log for EGPC (+45)', time: '2 hours ago', ip: '192.168.1.45' },
   { id: 3, user: 'system', action: 'DAILY_FORECAST_GENERATION', details: 'Generated forecasts for 15 locations', time: '4 hours ago', ip: '127.0.0.1' },
   { id: 4, user: 'admin', action: 'USER_LOGIN', details: 'Successful login from administrator account', time: '5 hours ago', ip: '192.168.1.45' },
 ];
@@ -28,7 +28,7 @@ export default function ReportsView() {
     setLoading(true);
     setTimeout(() => {
       // Simulate download
-      const content = `Date,Location,Period,Forecast,Actual,Waste\n2026-06-01,HQ-RYD,lunch,1680,1650,30`;
+      const content = `Date,Location,Period,Forecast,Actual,Waste\n2026-06-01,HQ-CAI,lunch,1680,1650,30`;
       const blob = new Blob([content], { type: 'text/csv' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');

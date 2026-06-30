@@ -70,7 +70,7 @@ export default function DashboardView() {
     },
     {
       title: 'Cost Savings',
-      value: `${summary?.saved_cost_sar.toLocaleString()} SAR`,
+      value: `${summary?.saved_cost_egp.toLocaleString()} EGP`,
       change: '+18.2%',
       trend: 'up',
       icon: DollarSign,

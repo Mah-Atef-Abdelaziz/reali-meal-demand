@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 const FEATURE_COLUMNS = [
-  "location_id", "year", "month", "day", "day_of_week", "day_of_year", "week_of_year", "quarter", "is_weekend", "saudi_dow",
+  "location_id", "year", "month", "day", "day_of_week", "day_of_year", "week_of_year", "quarter", "is_weekend", "egypt_dow",
   "is_holiday", "days_to_holiday", "temperature_avg", "temperature_high", "humidity_percent", "weather_code", "location_type",
   "location_capacity", "visitor_count", "has_event", "event_attendees", "active_employees", "period_code", "menu_item_count",
   "lag_1d", "lag_2d", "lag_3d", "lag_7d", "lag_14d", "lag_28d", "rolling_mean_7d", "rolling_std_7d", "rolling_mean_14d",

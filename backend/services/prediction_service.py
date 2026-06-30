@@ -110,7 +110,7 @@ class PredictionService:
             features["week_of_year"] = target_date.isocalendar()[1]
             features["quarter"] = (target_date.month - 1) // 3 + 1
             features["is_weekend"] = 1 if target_date.weekday() in (4, 5) else 0
-            features["saudi_dow"] = (target_date.weekday() + 2) % 7
+            features["egypt_dow"] = (target_date.weekday() + 2) % 7
             features["period_code"] = {"breakfast": 0, "lunch": 1, "dinner": 2}[period]
 
             # Get historical lag from DB

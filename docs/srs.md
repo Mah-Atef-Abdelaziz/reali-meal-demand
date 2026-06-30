@@ -9,7 +9,7 @@
 
 ## 1. Business Problem
 
-A food service provider prepares hot meals (breakfast, lunch, dinner) for employees across multiple work locations (office, offshore, onshore). The company suffers from **significant food waste** because hot meals are prepared before knowing actual demand. Unlike cold meals, hot meals cannot be stored. The company needs an AI system to predict tomorrow's meal demand, reduce waste, and optimize kitchen operations.
+A food service provider prepares hot meals (breakfast, lunch, dinner) for employees across multiple work locations (office, field, industrial). The company suffers from **significant food waste** because hot meals are prepared before knowing actual demand. Unlike cold meals, hot meals cannot be stored. The company needs an AI system to predict tomorrow's meal demand, reduce waste, and optimize kitchen operations.
 
 ---
 

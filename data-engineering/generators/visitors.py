@@ -20,10 +20,10 @@ EVENT_NAMES = {
     "other": ["Health Checkup", "Blood Donation Drive", "Career Fair", "Innovation Day"],
 }
 VISITOR_COMPANIES = [
-    "Saudi Aramco", "SABIC", "Bechtel", "Fluor", "Jacobs", "Wood Group",
-    "Schlumberger", "Halliburton", "Baker Hughes", "TechnipFMC",
+    "Orascom Construction", "Ezz Steel", "ENPPI", "EGAS", "Sidi Kerir Petrochemicals",
+    "El Sewedy Electric", "Arabian Cement", "Petrojet", "Eni Egypt",
     "KPMG", "Deloitte", "EY", "PwC", "McKinsey",
-    "Ministry of Energy", "GOSI", "SASO",
+    "Ministry of Petroleum", "NTRA", "GAFI",
 ]
 
 
@@ -84,7 +84,7 @@ def generate_visitors() -> pd.DataFrame:
         for loc_id in range(1, len(LOCATIONS) + 1):
             loc_type = LOCATIONS[loc_id - 1][2]
             # Office locations get more visitors
-            visit_prob = 0.20 if loc_type == "office" else 0.08 if loc_type == "onshore" else 0.03
+            visit_prob = 0.20 if loc_type == "office" else 0.08 if loc_type == "industrial" else 0.03
             if np.random.random() < visit_prob:
                 count = int(np.random.exponential(5)) + 1
                 company = np.random.choice(VISITOR_COMPANIES)

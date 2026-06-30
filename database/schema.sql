@@ -11,7 +11,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 CREATE TYPE user_role AS ENUM ('admin', 'manager', 'kitchen_staff', 'viewer');
 CREATE TYPE meal_period AS ENUM ('breakfast', 'lunch', 'dinner');
 CREATE TYPE meal_temp AS ENUM ('hot', 'cold');
-CREATE TYPE location_type AS ENUM ('office', 'offshore', 'onshore');
+CREATE TYPE location_type AS ENUM ('office', 'field', 'industrial');
 CREATE TYPE shift_type AS ENUM ('morning', 'afternoon', 'night', 'rotational');
 CREATE TYPE weather_condition AS ENUM ('sunny', 'cloudy', 'rainy', 'stormy', 'snowy', 'foggy', 'windy');
 CREATE TYPE event_type AS ENUM ('company_meeting', 'training', 'celebration', 'maintenance', 'external_visit', 'other');
@@ -37,7 +37,7 @@ CREATE TABLE work_locations (
     code VARCHAR(20) NOT NULL UNIQUE,
     location_type location_type NOT NULL,
     city VARCHAR(100),
-    country VARCHAR(100) DEFAULT 'Saudi Arabia',
+    country VARCHAR(100) DEFAULT 'Egypt',
     capacity INTEGER NOT NULL DEFAULT 500,
     is_active BOOLEAN DEFAULT TRUE,
     latitude DECIMAL(10, 7),
@@ -380,21 +380,21 @@ INSERT INTO departments (name, code) VALUES
 
 -- Default work locations
 INSERT INTO work_locations (name, code, location_type, city, capacity) VALUES
-('Headquarters', 'HQ-RYD', 'office', 'Riyadh', 2000),
-('Jeddah Office', 'OFF-JED', 'office', 'Jeddah', 800),
-('Dammam Office', 'OFF-DMM', 'office', 'Dammam', 600),
-('Al Khobar Office', 'OFF-KHB', 'office', 'Al Khobar', 400),
-('Jubail Industrial', 'ONS-JBL', 'onshore', 'Jubail', 1500),
-('Yanbu Plant', 'ONS-YNB', 'onshore', 'Yanbu', 1200),
-('Ras Tanura Refinery', 'ONS-RST', 'onshore', 'Ras Tanura', 1800),
-('Abqaiq Processing', 'ONS-ABQ', 'onshore', 'Abqaiq', 1000),
-('Shaybah Field', 'OFS-SHB', 'offshore', 'Shaybah', 600),
-('Safaniyah Platform', 'OFS-SFN', 'offshore', 'Safaniyah', 500),
-('Zuluf Platform', 'OFS-ZLF', 'offshore', 'Zuluf', 400),
-('Marjan Platform', 'OFS-MRJ', 'offshore', 'Marjan', 450),
-('Berri Field', 'OFS-BRI', 'offshore', 'Berri', 350),
-('Khurais Plant', 'ONS-KHR', 'onshore', 'Khurais', 900),
-('KAUST Campus', 'OFF-KST', 'office', 'Thuwal', 300);
+('Headquarters', 'HQ-CAI', 'office', 'Cairo', 2000),
+('Alexandria Office', 'OFF-ALX', 'office', 'Alexandria', 800),
+('Suez Office', 'OFF-SUZ', 'office', 'Suez', 600),
+('6th October Office', 'OFF-OCT', 'office', '6th October City', 400),
+('Ain Sokhna Industrial', 'IND-ASK', 'industrial', 'Ain Sokhna', 1500),
+('Borg El-Arab Plant', 'IND-BRG', 'industrial', 'Borg El-Arab', 1200),
+('El-Hamra Refinery', 'IND-HMR', 'industrial', 'El-Alamein', 1800),
+('Abu Qir Processing', 'IND-ABQ', 'industrial', 'Abu Qir', 1000),
+('Ras Gharib Field', 'FLD-RSG', 'field', 'Ras Gharib', 600),
+('Gulf of Suez Platform', 'FLD-GOS', 'field', 'Gulf of Suez', 500),
+('Western Desert Field', 'FLD-WDS', 'field', 'Western Desert', 400),
+('Belayim Platform', 'FLD-BLY', 'field', 'Belayim', 450),
+('Assiut Refinery', 'IND-AST', 'industrial', 'Assiut', 350),
+('El-Mex Industrial', 'IND-MEX', 'industrial', 'El-Mex', 900),
+('New Administrative Capital', 'OFF-NAC', 'office', 'New Capital', 300);
 
 -- Default meal types
 INSERT INTO meal_types (name, category, temperature, period, estimated_cost, preparation_time_minutes) VALUES

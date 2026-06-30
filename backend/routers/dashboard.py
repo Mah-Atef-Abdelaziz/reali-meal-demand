@@ -60,7 +60,7 @@ async def get_summary(db: AsyncSession = Depends(get_db)):
     waste_reduction = round(baseline_waste - waste_pct, 1) if waste_pct < baseline_waste else 0
 
     # Cost savings estimate
-    avg_meal_cost = 15.0  # SAR
+    avg_meal_cost = 15.0  # EGP
     saved_cost = round(waste_meals * avg_meal_cost * 0.5, 2)  # 50% of wasted cost recovered
 
     # Accuracy estimate (from prediction records that have actual counts)
@@ -82,7 +82,7 @@ async def get_summary(db: AsyncSession = Depends(get_db)):
     return {
         "total_predictions": total_predictions if total_predictions > 0 else 1450,
         "average_confidence": round(float(avg_confidence), 3) if avg_confidence else 0.942,
-        "saved_cost_sar": saved_cost if saved_cost > 0 else 148500.0,
+        "saved_cost_egp": saved_cost if saved_cost > 0 else 148500.0,
         "waste_reduction_percent": waste_reduction if waste_reduction > 0 else 24.5,
         "actual_vs_predicted_accuracy": accuracy,
     }
@@ -120,11 +120,11 @@ async def get_location_capacity(db: AsyncSession = Depends(get_db)):
     # If no real data, return sensible defaults
     if not output or all(o["demand"] <= 1 for o in output):
         return [
-            {"location": "HQ-RYD", "capacity": 2000, "demand": 1680},
-            {"location": "OFF-JED", "capacity": 800, "demand": 620},
-            {"location": "ONS-JBL", "capacity": 1500, "demand": 1320},
-            {"location": "OFS-SHB", "capacity": 600, "demand": 540},
-            {"location": "ONS-YNB", "capacity": 1200, "demand": 980},
+            {"location": "HQ-CAI", "capacity": 2000, "demand": 1680},
+            {"location": "OFF-ALX", "capacity": 800, "demand": 620},
+            {"location": "IND-ASK", "capacity": 1500, "demand": 1320},
+            {"location": "FLD-RSG", "capacity": 600, "demand": 540},
+            {"location": "IND-BRG", "capacity": 1200, "demand": 980},
         ]
     return output
 

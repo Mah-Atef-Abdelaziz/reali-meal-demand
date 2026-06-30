@@ -5,7 +5,7 @@
     "period": "breakfast",
     "predicted": 26.9490966796875,
     "actual": 30.0,
-    "explanation": "The predicted meal count is 27. Key factors: same dow last week (23.0) increased the prediction by 0.4; same day last week (23.0) increased the prediction by 0.3; 7-day average demand (23.285714285714285) increased the prediction by 0.1; Saudi work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
+    "explanation": "The predicted meal count is 27. Key factors: same dow last week (23.0) increased the prediction by 0.4; same day last week (23.0) increased the prediction by 0.3; 7-day average demand (23.285714285714285) increased the prediction by 0.1; Egypt work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
   },
   {
     "date": "2025-12-02",
@@ -13,7 +13,7 @@
     "period": "breakfast",
     "predicted": 26.19405174255371,
     "actual": 28.0,
-    "explanation": "The predicted meal count is 26. Key factors: same dow last week (20.0) increased the prediction by 0.4; same day last week (20.0) increased the prediction by 0.3; 7-day average demand (18.428571428571427) increased the prediction by 0.1; Saudi work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
+    "explanation": "The predicted meal count is 26. Key factors: same dow last week (20.0) increased the prediction by 0.4; same day last week (20.0) increased the prediction by 0.3; 7-day average demand (18.428571428571427) increased the prediction by 0.1; Egypt work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
   },
   {
     "date": "2025-12-02",
@@ -21,7 +21,7 @@
     "period": "lunch",
     "predicted": 36.19820022583008,
     "actual": 34.0,
-    "explanation": "The predicted meal count is 36. Key factors: same dow last week (33.0) increased the prediction by 0.4; same day last week (33.0) increased the prediction by 0.3; 7-day average demand (30.857142857142858) increased the prediction by 0.1; Saudi work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
+    "explanation": "The predicted meal count is 36. Key factors: same dow last week (33.0) increased the prediction by 0.4; same day last week (33.0) increased the prediction by 0.3; 7-day average demand (30.857142857142858) increased the prediction by 0.1; Egypt work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
   },
   {
     "date": "2025-12-02",
@@ -29,7 +29,7 @@
     "period": "dinner",
     "predicted": 54.94805908203125,
     "actual": 55.0,
-    "explanation": "The predicted meal count is 55. Key factors: same dow last week (64.0) increased the prediction by 0.4; same day last week (64.0) increased the prediction by 0.3; 7-day average demand (41.142857142857146) increased the prediction by 0.1; Saudi work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
+    "explanation": "The predicted meal count is 55. Key factors: same dow last week (64.0) increased the prediction by 0.4; same day last week (64.0) increased the prediction by 0.3; 7-day average demand (41.142857142857146) increased the prediction by 0.1; Egypt work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
   },
   {
     "date": "2025-12-02",
@@ -37,6 +37,6 @@
     "period": "breakfast",
     "predicted": 6.611416816711426,
     "actual": 9.0,
-    "explanation": "The predicted meal count is 7. Key factors: same dow last week (10.0) increased the prediction by 0.4; same day last week (10.0) increased the prediction by 0.3; 7-day average demand (6.285714285714286) increased the prediction by 0.1; Saudi work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
+    "explanation": "The predicted meal count is 7. Key factors: same dow last week (10.0) increased the prediction by 0.4; same day last week (10.0) increased the prediction by 0.3; 7-day average demand (6.285714285714286) increased the prediction by 0.1; Egypt work day (3) increased the prediction by 0.0; holiday status (0) increased the prediction by 0.0."
   }
 ]

@@ -196,7 +196,7 @@ I'll build this in **5 batches**, each producing a working increment:
 
 #### [NEW] `data-engineering/` (all files)
 - Synthetic data generators producing:
-  - 100,000 employees across 20 departments, 15 locations (offshore/onshore/office)
+  - 100,000 employees across 20 departments, 15 locations (office/industrial/field)
   - 730 days × daily menus with realistic meal rotation
   - ~2M+ meal transaction records with realistic patterns (day-of-week, weather, holiday effects)
   - Attendance records correlated with transactions

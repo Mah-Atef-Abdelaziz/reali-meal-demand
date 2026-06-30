@@ -14,8 +14,8 @@ import {
 } from 'lucide-react';
 
 const INITIAL_VISITORS = [
-  { id: 1, date: '2026-06-30', location: 'HQ-RYD', count: 45, company: 'Aramco', purpose: 'Q2 Audit', meals: 'Lunch' },
-  { id: 2, date: '2026-07-02', location: 'ONS-JBL', count: 120, company: 'SABIC', purpose: 'Safety Seminar', meals: 'Breakfast, Lunch' },
+  { id: 1, date: '2026-06-30', location: 'HQ-CAI', count: 45, company: 'EGPC', purpose: 'Q2 Audit', meals: 'Lunch' },
+  { id: 2, date: '2026-07-02', location: 'IND-AST', count: 120, company: 'Orascom', purpose: 'Safety Seminar', meals: 'Breakfast, Lunch' },
 ];
 
 const SAMPLE_MENU_ITEMS = [
@@ -30,7 +30,7 @@ const SAMPLE_MENU_ITEMS = [
 
 export default function MenusView() {
   const [visitors, setVisitors] = useState(INITIAL_VISITORS);
-  const [selectedLocation, setSelectedLocation] = useState('HQ-RYD');
+  const [selectedLocation, setSelectedLocation] = useState('HQ-CAI');
   const [selectedDate, setSelectedDate] = useState('2026-06-30');
   
   // Visitor Form State
@@ -76,12 +76,12 @@ export default function MenusView() {
             <div className="flex justify-between items-center border-b border-charcoal-800 pb-4">
               <div>
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider">Scheduled Daily Menu</h3>
-                <p className="text-charcoal-400 text-[11px] mt-0.5">Active kitchen preparation items for RYD HQ.</p>
+                <p className="text-charcoal-400 text-[11px] mt-0.5">Active kitchen preparation items for Cairo HQ.</p>
               </div>
               <div className="flex gap-3">
                 <select className="bg-charcoal-900 border border-charcoal-800 rounded-lg px-3 py-1.5 text-[11px] text-white focus:outline-none focus:border-gold-500 font-semibold">
-                  <option value="HQ-RYD">HQ-RYD</option>
-                  <option value="ONS-JBL">ONS-JBL</option>
+                  <option value="HQ-CAI">HQ-CAI</option>
+                  <option value="IND-AST">IND-AST</option>
                 </select>
                 <input 
                   type="date" 
@@ -105,7 +105,7 @@ export default function MenusView() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-bold text-gold-500">{item.cost.toFixed(2)} SAR</span>
+                    <span className="text-xs font-bold text-gold-500">{item.cost.toFixed(2)} EGP</span>
                     <span className="text-[9px] text-charcoal-400 block mt-0.5 uppercase tracking-wider font-bold">{item.period}</span>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export default function MenusView() {
                   type="text" 
                   value={vCompany}
                   onChange={(e) => setVCompany(e.target.value)}
-                  placeholder="e.g. Saudi Aramco"
+                  placeholder="e.g. Orascom Construction"
                   className="w-full bg-charcoal-900 border border-charcoal-800 rounded-xl px-4 py-3 text-xs text-white placeholder-charcoal-500 focus:outline-none focus:border-gold-500 font-semibold"
                 />
               </div>

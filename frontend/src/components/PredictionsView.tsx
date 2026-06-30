@@ -16,11 +16,11 @@ import {
 import { api } from '../lib/api';
 
 const LOCATIONS = [
-  { id: 1, name: 'Headquarters (HQ-RYD) — Riyadh', capacity: 2000 },
-  { id: 2, name: 'Jeddah Office (OFF-JED) — Jeddah', capacity: 800 },
-  { id: 5, name: 'Jubail Industrial (ONS-JBL) — Jubail', capacity: 1500 },
-  { id: 6, name: 'Yanbu Plant (ONS-YNB) — Yanbu', capacity: 1200 },
-  { id: 9, name: 'Shaybah Field (OFS-SHB) — Shaybah', capacity: 600 },
+  { id: 1, name: 'Headquarters (HQ-CAI) — Cairo', capacity: 2000 },
+  { id: 2, name: 'Alexandria Office (OFF-ALX) — Alexandria', capacity: 800 },
+  { id: 5, name: 'Ain Sokhna Industrial (IND-ASK) — Ain Sokhna', capacity: 1500 },
+  { id: 6, name: 'Borg El-Arab Plant (IND-BRG) — Borg El-Arab', capacity: 1200 },
+  { id: 9, name: 'Ras Gharib Field (FLD-RSG) — Ras Gharib', capacity: 600 },
 ];
 
 export default function PredictionsView() {
@@ -178,7 +178,7 @@ export default function PredictionsView() {
               <div>
                 <h4 className="text-sm font-bold text-amber-400">Smart Waste Mitigation Recommendation</h4>
                 <p className="text-charcoal-300 text-xs mt-1.5 leading-relaxed">
-                  Based on historical consumption variance for {period} on similar days, we recommend setting a strict cap of **{forecast.recommended_quantity} prepared meals** with kitchen staff. Additionally, preparing lighter portions and cold items could save an estimated **{Math.round(forecast.predicted_waste * 12)} SAR** in material wastage.
+                  Based on historical consumption variance for {period} on similar days, we recommend setting a strict cap of **{forecast.recommended_quantity} prepared meals** with kitchen staff. Additionally, preparing lighter portions and cold items could save an estimated **{Math.round(forecast.predicted_waste * 12)} EGP** in material wastage.
                 </p>
               </div>
             </div>

@@ -107,7 +107,7 @@ class RecommendationEngine:
                 "category": "quantity", "title": "Upcoming Holiday Impact",
                 "description": f"Holidays coming up: {names}. Demand expected to change significantly.",
                 "impact": "high", "metric_value": len(holidays), "metric_unit": "holidays",
-                "action": "Reduce office location preparations by 80%. Maintain offshore at 50%.",
+                "action": "Reduce office location preparations by 80%. Maintain field sites at 50%.",
                 "generated_at": datetime.now(timezone.utc)
             }
         return None

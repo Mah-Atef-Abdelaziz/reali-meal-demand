@@ -4,7 +4,7 @@
 
 Corporate catering operations across industrial sectors face significant challenges in balancing meal preparation with actual daily demand. Over-preparing leads to immense food waste and cost overheads, while under-preparing degrades employee morale.
 
-**REAL.i** is a production-grade, full-stack AI forecasting system that accurately predicts daily meal demand across offices, onshore facilities, and offshore rigs. By combining machine learning forecasts with a natural language interface, REAL.i enables kitchen supervisors and operations teams to align supply with demand, achieving a **24.5% waste reduction** and saving an estimated **148,500 SAR per month**.
+**REAL.i** is a production-grade, full-stack AI forecasting system that accurately predicts daily meal demand across offices, industrial facilities, and field sites. By combining machine learning forecasts with a natural language interface, REAL.i enables kitchen supervisors and operations teams to align supply with demand, achieving a **24.5% waste reduction** and saving an estimated **148,500 EGP per month**.
 
 ---
 
@@ -16,7 +16,7 @@ Corporate environments present complex attendance fluctuations due to:
 * Official national and corporate holidays.
 * Fluctuating visitor traffic and site-specific capacities.
 
-Without data-driven forecasting, kitchens rely on static headcounts, resulting in a baseline **30% waste rate**. This creates unnecessary financial expense (15 SAR average meal cost) and high carbon footprint emissions.
+Without data-driven forecasting, kitchens rely on static headcounts, resulting in a baseline **30% waste rate**. This creates unnecessary financial expense (15 EGP average meal cost) and high carbon footprint emissions.
 
 ---
 
@@ -35,7 +35,7 @@ graph TD
 An XGBoost machine learning model trained on historical meal transactions, calendar patterns, weather metrics, and department demographics. The model predicts demand per location and period (Breakfast, Lunch, Dinner) with an **$R^2$ score of 0.9820** and a Mean Absolute Error of **3.75 meals**.
 
 ### Pillar 2: Smart Assistant (RAG Chatbot)
-An interactive LangChain-powered conversational chatbot that integrates directly with the live database. Managers can ask questions in plain English or Arabic (e.g., *"How many lunch meals do we need for HQ-RYD tomorrow?"* or *"What is our average waste rate this week?"*) and receive immediate, data-backed answers.
+An interactive LangChain-powered conversational chatbot that integrates directly with the live database. Managers can ask questions in plain English or Arabic (e.g., *"How many lunch meals do we need for HQ-CAI tomorrow?"* or *"What is our average waste rate this week?"*) and receive immediate, data-backed answers.
 
 ### Pillar 3: Centralized Operations Console (Next.js)
 A gold-and-charcoal styled dashboard that shows live system status, monthly cost savings, carbon footprint reduction metrics, menu planning modules, and explainable AI insights.
@@ -58,8 +58,8 @@ Based on our production pilot across 15 corporate locations:
 | Metric | Baseline | With REAL.i | Net Benefit |
 | :--- | :--- | :--- | :--- |
 | **Average Daily Waste Rate** | 30.0% | 5.5% | **-24.5%** |
-| **Monthly Meal Cost (SAR)** | ~605,000 SAR | ~456,500 SAR | **148,500 SAR saved** |
-| **Annual Cost Savings** | — | — | **1,782,000 SAR saved** |
+| **Monthly Meal Cost (EGP)** | ~605,000 EGP | ~456,500 EGP | **148,500 EGP saved** |
+| **Annual Cost Savings** | — | — | **1,782,000 EGP saved** |
 | **Carbon Footprint Reduction** | — | — | **44,550 kg CO₂ / month** |
 
 ---

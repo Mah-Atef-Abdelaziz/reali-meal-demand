@@ -28,7 +28,7 @@ async def public_message(req: ChatRequest):
     if any(w in message for w in ["forecast", "predict", "tomorrow", "demand"]):
         response = (
             "Based on the XGBoost model (R\u00b2 = 0.9820), the lunch forecast for "
-            "Riyadh Headquarters tomorrow is **1,720 meals** (confidence score: **95.4%**). "
+            "Cairo Headquarters tomorrow is **1,720 meals** (confidence score: **95.4%**). "
             "I recommend preparing 1,806 meals to maintain a safe 5% buffer.\n\n"
             "Key contributing factors:\n"
             "* Same day last week demand: +45.2%\n"
@@ -40,10 +40,10 @@ async def public_message(req: ChatRequest):
         response = (
             "Total food waste has decreased by **24.5%** since AI deployment. "
             "Key improvements:\n\n"
-            "* Onshore plants (Jubail, Yanbu): **-31%** waste reduction\n"
-            "* Offshore platforms: **-18%** waste reduction\n"
+            "* Industrial plants (Ain Sokhna, Borg El-Arab): **-31%** waste reduction\n"
+            "* Field sites: **-18%** waste reduction\n"
             "* Office locations: **-22%** waste reduction\n\n"
-            "Estimated monthly savings: **148,500 SAR** in reduced material costs."
+            "Estimated monthly savings: **148,500 EGP** in reduced material costs."
         )
     elif any(w in message for w in ["menu", "recommend", "weather", "hot", "cold"]):
         response = (
@@ -68,11 +68,11 @@ async def public_message(req: ChatRequest):
     elif any(w in message for w in ["location", "site", "where", "facility"]):
         response = (
             "Active facility breakdown (15 locations):\n\n"
-            "* **Office Sites** (4): HQ-RYD, OFF-JED, OFF-DMM, OFF-KHB\n"
-            "* **Onshore Plants** (5): ONS-JBL, ONS-YNB, ONS-RST, ONS-ABQ, ONS-KHR\n"
-            "* **Offshore Platforms** (5): OFS-SHB, OFS-SFN, OFS-ZLF, OFS-MRJ, OFS-BRI\n"
-            "* **Campus** (1): KAUST Campus\n\n"
-            "Highest demand: **HQ-RYD** (avg. 1,680 meals/day). Lowest: **OFS-BRI** (avg. 280 meals/day)."
+            "* **Office Sites** (4): HQ-CAI, OFF-ALX, OFF-SUZ, OFF-OCT\n"
+            "* **Industrial Plants** (6): IND-ASK, IND-BRG, IND-HMR, IND-ABQ, IND-AST, IND-MEX\n"
+            "* **Field Sites** (4): FLD-RSG, FLD-GOS, FLD-WDS, FLD-BLY\n"
+            "* **New Capital** (1): OFF-NAC\n\n"
+            "Highest demand: **HQ-CAI** (avg. 1,680 meals/day). Lowest: **IND-AST** (avg. 280 meals/day)."
         )
     elif any(w in message for w in ["hello", "hi", "hey", "help"]):
         response = (
